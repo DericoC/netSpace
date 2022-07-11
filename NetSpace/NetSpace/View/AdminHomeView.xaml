@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel" xmlns:model="clr-namespace:NetSpace.Model"
+             x:DataType="viewmodel:AdminHomeViewModel"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F8F7F9"
+             x:Class="NetSpace.View.AdminHomeView">
+    <ContentPage.IconImageSource>
+        <FontImageSource FontFamily="FASolid" Glyph="&#xf015;" Size="20" Color="Black"/>
+    </ContentPage.IconImageSource>
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Próximos eventos" HorizontalTextAlignment="Start" TextColor="Black" FontSize="24" Margin="10, 20, 10, 20" FontAttributes="Bold"/>
+            <syncfusion:SfListView x:Name="threeReservations" SelectionMode="Single" IsScrollingEnabled="False"
+                    ItemsSource="{Binding reservations}" HeightRequest="360" Margin="0,-20,0,-10"
+                    ItemSize="120" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
+                <syncfusion:SfListView.LayoutManager>
+                    <syncfusion:LinearLayout />
+                </syncfusion:SfListView.LayoutManager>
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="True" IsClippedToBounds="True" Padding="0" CornerRadius="15" Margin="10">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="White" x:DataType="model:Reservation">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.PlaceDetailCommand, Source={x:Reference threeReservations}}" CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90*"/>
+                                        <ColumnDefinition Width="5.6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.33*"/>
+                                        <RowDefinition Height="0.33*"/>
+                                        <RowDefinition Height="0.33*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="{Binding place.place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="20,10,0,0" TextColor="black"/>
+                                    <Label Text="&#xf105;" FontFamily="FASolid" Grid.Row="1" Grid.Column="1" FontSize="25" TextColor="Black" Margin="5,0"/>
+                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="0" TextColor="Gray" Margin="20,5,0,0">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1} • {2}">
+                                                <Binding Path="user.first_name"/>
+                                                <Binding Path="user.last_name"/>
+                                                <Binding Path="date_slot" StringFormat="{}{0:MM/dd/yyyy}"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="2" Grid.Column="0" TextColor="Gray" Margin="20,-5,0,0">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="time_start" />
+                                                <Binding Path="time_end"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+            <Label Text="Mejor desempeño" HorizontalTextAlignment="Start" TextColor="Black" FontSize="24" Margin="10, 25, 10, 20" FontAttributes="Bold"/>
+            <syncfusion:SfListView x:Name="topPlaces" SelectionMode="Single"
+                    ItemsSource="{Binding places}" IsScrollingEnabled="False" Margin="0,-20,0,0"
+                    ItemSize="120" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
+                <syncfusion:SfListView.LayoutManager>
+                    <syncfusion:LinearLayout />
+                </syncfusion:SfListView.LayoutManager>
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="True" IsClippedToBounds="True" Padding="0" CornerRadius="15" Margin="10">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="White" x:DataType="model:Place">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.PlaceDetailCommand, Source={x:Reference topPlaces}}" CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*"/>
+                                        <ColumnDefinition Width="63*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.33*"/>
+                                        <RowDefinition Height="0.33*"/>
+                                        <RowDefinition Height="0.33*"/>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout>
+                                        <Image Grid.Row="0" Grid.Column="0" MinimumWidthRequest="110" HeightRequest="110" WidthRequest="115" Aspect="Fill">
+                                            <Image.Source>
+                                                <UriImageSource
+                                        CacheValidity="14"
+                                        CachingEnabled="true"
+                                        Uri="{Binding image}"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </StackLayout>
+
+                                    <Label Text="{Binding place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="5,10,0,0" TextColor="black"/>
+                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="1" TextColor="Gray" Margin="5,5,0,0">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1} • {2} ">
+                                                <Binding Path="manager.first_name"/>
+                                                <Binding Path="manager.last_name"/>
+                                                <Binding Path="amenities"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Label Text="&#xf005;" FontFamily="FASolid" Grid.Row="2" Grid.Column="1" FontSize="14" TextColor="Red" Margin="5,0"/>
+                                    <Label Text="{Binding rating}" Grid.Row="2" Grid.Column="1" Margin="25, 0, 0, 0" FontSize="14" />
+                                    <Label Text="&#xf105;" FontFamily="FASolid" Grid.Row="1" Grid.Column="2" FontSize="25" TextColor="Black" Margin="5,0"/>
+
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+    x:DataType="viewmodel:PlaceViewModel"
+    BackgroundColor="#F8F7F9"
+    ios:Page.UseSafeArea="true"
+    x:Class="NetSpace.View.PlaceView">
+
+    <NavigationPage.TitleView>
+        <Label Text="NetSpace" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Font="Bold,24"/>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0" VerticalOptions="FillAndExpand"
+                             WidthRequest="{OnPlatform Default='-1', UWP='350'}" BackgroundColor="White">
+
+                <Image x:Name="img" Aspect="AspectFill" Source="{Binding placeDetail.image}"></Image>
+
+                <Frame CornerRadius="20" BackgroundColor="White" Margin="0,-20,0,0" HasShadow="False" Padding="0,10,0,10">
+                    <Label x:Name="lblName" Margin="20, 20, 20, 20" FontSize="24" FontAttributes="Bold" TextColor="black" Text="{Binding placeDetail.place_name}"/>
+                </Frame>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" Color="#1690F4" Margin="20,-20,20,20"/>
+                <Label x:Name="lblDescription" Margin="20, 0, 20, 20" FontSize="20" TextColor="black" Text="{Binding placeDetail.description}"/>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Dimensiones: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblDimensiones" FontSize="20" Text="{Binding placeDetail.dimensions}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Capacidad: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblCapacidad" FontSize="20" Text="{Binding placeDetail.capacity}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Amenidades: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblAmenidades" FontSize="20" Text="{Binding placeDetail.amenities}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Baños: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblBathrooms" FontSize="20" Text="{Binding hasRestrooms}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Precio: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblPrice" FontSize="20" Text="{Binding placeDetail.policy.price, StringFormat='${0}'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Depósito: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblDeposito" FontSize="20" Text="{Binding placeDetail.policy.deposit, StringFormat='${0}'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Políticas: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblPolicy" FontSize="20" Text="{Binding placeDetail.policy.policy_name}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <buttons:SfButton Grid.Row="3" Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold" BackgroundColor="#1690F4"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
+

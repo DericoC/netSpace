@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewmodel="clr-namespace:NetSpace.ViewModel" xmlns:model="clr-namespace:NetSpace.Model"
+    x:DataType="viewmodel:HomeViewModel"
+    BackgroundColor="#F8F7F9"
+    NavigationPage.HasBackButton="False"
+    x:Class="NetSpace.View.HomeView"
+    x:Name="Page">
+
+    <NavigationPage.TitleView>
+        <Label Text="NetSpace" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24"/>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding SearchCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="&#xf002;"
+                    Size="20"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Command="{Binding MenuCommand}" x:Name="btnMenu">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="&#xf142;"
+                    Size="25"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <Label x:Name="popUpLabel" Text=" " FontSize="1" HorizontalOptions="End"/>
+        <syncfusion:SfListView x:Name="placeList" SelectionMode="Single"
+                    ItemsSource="{Binding places}"
+                    ItemSize="130" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
+            <syncfusion:SfListView.LayoutManager>
+                <syncfusion:LinearLayout />
+            </syncfusion:SfListView.LayoutManager>
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="True" IsClippedToBounds="True" Padding="0" CornerRadius="15" Margin="10">
+                        <StackLayout Orientation="Horizontal" BackgroundColor="White" x:DataType="model:Place">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.PlaceDetailCommand, Source={x:Reference placeList}}" CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="60*"/>
+                                    <ColumnDefinition Width="10*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.33*"/>
+                                    <RowDefinition Height="0.33*"/>
+                                    <RowDefinition Height="0.33*"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout>
+                                    <Image Grid.Row="0" Grid.Column="0" MinimumWidthRequest="110" HeightRequest="110" WidthRequest="115" Aspect="Fill">
+                                        <Image.Source>
+                                            <UriImageSource
+                                        CacheValidity="14"
+                                        CachingEnabled="true"
+                                        Uri="{Binding image}"/>
+                                        </Image.Source>
+                                    </Image>
+                                </StackLayout>
+
+                                <Label Text="{Binding place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="5,10,0,0" TextColor="black"/>
+                                <Label Text="{Binding description}" FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="1" TextColor="Gray" Margin="5,0"/>
+                                <Label Text="&#xf005;" FontFamily="FASolid" Grid.Row="2" Grid.Column="1" FontSize="14" TextColor="Red" Margin="5,0"/>
+                                <Label Text="{Binding rating}" Grid.Row="2" Grid.Column="1" Margin="25, 0, 0, 0" FontSize="14" />
+                                <Label Text="&#xf061;" FontFamily="FASolid" Grid.Row="2" Grid.Column="2" FontSize="20" TextColor="black"/>
+
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+
+        <sfPopup:SfPopupLayout x:Name="popup" IsOpen="{Binding displayPopup}" RelativePosition="AlignBottomLeft" AbsoluteX="-7" AbsoluteY="0">
+            <sfPopup:SfPopupLayout.PopupView>
+                <sfPopup:PopupView ShowFooter="False" ShowHeader="False" AnimationMode="Fade">
+                    <sfPopup:PopupView.ContentTemplate>
+                        <DataTemplate>
+                            <CollectionView ItemsSource="{Binding popUpMenuItems}" HeightRequest="165" WidthRequest="200">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Padding="10, 10, 0, 0" x:DataType="model:PopUpMenuItem">
+                                            <buttons:SfButton Text="{Binding name}"
+                                                             BorderWidth="0"
+                                                             TextColor="Black"
+                                                             BackgroundColor="Transparent"
+                                                             CornerRadius="2"
+                                                             FontSize="20"
+                                                             ShowIcon="True"
+                                                             HorizontalTextAlignment="Start"
+                                                             Command="{Binding Source={x:Reference Page}, Path=BindingContext.MenuOptionCommand}"
+                                                             CommandParameter="{Binding name}">
+
+                                                <buttons:SfButton.Image>
+                                                    <Image Margin="3">
+                                                        <Image.Source>
+                                                            <FontImageSource Glyph="{Binding icon}" FontFamily="FASolid" Size="16"/>
+                                                        </Image.Source>
+                                                    </Image>
+                                                </buttons:SfButton.Image>
+                                            </buttons:SfButton>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </DataTemplate>
+                    </sfPopup:PopupView.ContentTemplate>
+                </sfPopup:PopupView>
+            </sfPopup:SfPopupLayout.PopupView>
+            <sfPopup:SfPopupLayout.RelativeView>
+                <x:Reference Name="popUpLabel"/>
+            </sfPopup:SfPopupLayout.RelativeView>
+        </sfPopup:SfPopupLayout>
+
+    </StackLayout>
+</ContentPage>
+
+ 

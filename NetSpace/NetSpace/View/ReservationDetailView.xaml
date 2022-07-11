@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+    x:DataType="viewmodel:ReservationDetailViewModel"
+    BackgroundColor="#F8F7F9"
+    ios:Page.UseSafeArea="true"
+    x:Class="NetSpace.View.ReservationDetailView">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0" VerticalOptions="FillAndExpand"
+                             WidthRequest="{OnPlatform Default='-1', UWP='350'}" BackgroundColor="White">
+
+                <Image x:Name="img" Aspect="AspectFill" Source="{Binding reservationDetail.place.image}"></Image>
+
+                <Frame CornerRadius="20" BackgroundColor="White" Margin="0,-20,0,0" HasShadow="False" Padding="0,10,0,10">
+                    <Label x:Name="lblName" Margin="20, 20, 20, 20" FontSize="24" FontAttributes="Bold" TextColor="black" Text="{Binding reservationDetail.place.place_name}"/>
+                </Frame>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" Color="#1690F4" Margin="20,-20,20,20"/>
+                <Label x:Name="lblDescription" Margin="20, 0, 20, 20" FontSize="20" TextColor="black" Text="{Binding reservationDetail.place.description}"/>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="QR: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblDimensiones" FontSize="20" Text="{Binding reservationDetail.qr}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Fecha: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lbldate_slot" FontSize="20" Text="{Binding reservationDetail.date_slot, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Hora Inicio: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lbltime_start" FontSize="20" Text="{Binding startTimeFormat}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Hora Final: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lbltime_end" FontSize="20" Text="{Binding endTimeFormat}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

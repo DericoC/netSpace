@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:NetSpace.View;assembly=NetSpace"
+            xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+            NavigationPage.HasNavigationBar="False"
+            ios:Page.UseSafeArea="true"
+             x:Class="NetSpace.View.AdminTabbedView">
+    
+    <local:AdminHomeView/>
+    <local:AdminReservationsView/>
+    <local:AdminPlacesView/>
+    <local:AdminAccountsView/>
+</TabbedPage>

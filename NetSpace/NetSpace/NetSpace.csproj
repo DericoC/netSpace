@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" />
+    <PackageReference Include="MySqlConnector" Version="2.1.10" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="20.1.0.61" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="20.1.0.61" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="20.1.0.61" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="20.1.0.61" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="20.1.0.61" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Model\" />
+    <None Remove="View\" />
+    <None Remove="ViewModel\" />
+    <None Remove="Util\" />
+    <None Remove="Service\" />
+    <None Remove="Util\Fonts\" />
+    <None Remove="PropertyChanged.Fody" />
+    <None Remove="MySqlConnector" />
+    <None Remove="Syncfusion.Xamarin.Core" />
+    <None Remove="Syncfusion.Xamarin.Buttons" />
+    <None Remove="Syncfusion.Xamarin.SfCalendar" />
+    <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Syncfusion.Xamarin.SfListView" />
+    <None Remove="Util\Fonts\FontAwesomeBrands.otf" />
+    <None Remove="Util\Fonts\FontAwesomeSolid.otf" />
+    <None Remove="Util\Fonts\FontAwsomeRegular.otf" />
+    <None Remove="Syncfusion.Xamarin.SfPopupLayout" />
+    <None Remove="MvvmLight" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="View\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="Util\" />
+    <Folder Include="Service\" />
+    <Folder Include="Util\Fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="View\PlaceView.xaml.cs">
+      <DependentUpon>PlaceView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Util\Fonts\FontAwesomeBrands.otf" />
+    <EmbeddedResource Include="Util\Fonts\FontAwesomeSolid.otf" />
+    <EmbeddedResource Include="Util\Fonts\FontAwsomeRegular.otf" />
+  </ItemGroup>
+</Project>

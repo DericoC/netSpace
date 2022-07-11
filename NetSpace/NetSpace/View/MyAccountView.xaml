@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:sfavatar="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+    x:DataType="viewmodel:MyAccountViewModel"
+    BackgroundColor="#F8F7F9"
+    x:Class="NetSpace.View.MyAccountView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <Label Text="NetSpace" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Font="Bold,24"/>
+    </NavigationPage.TitleView>
+    <ScrollView>
+        <StackLayout Margin="20, 30, 20, 20" Spacing="0"
+                     WidthRequest="{OnPlatform Default='-1', UWP='350'}">
+            <sfavatar:SfAvatarView ContentType="Initials"
+                               InitialsType="DoubleCharacter"
+                               AvatarName="Dérico Cavallini"
+                               InitialsColor="DimGray"
+                               WidthRequest="120"
+                               BorderThickness="0.1"
+                               HasShadow="True"
+                               ShadowColor="LightSlateGray"
+                               FontSize="40"
+                               FontAttributes="Bold"
+                               HeightRequest="120"
+                               CornerRadius="100"
+                               Margin="0, 0, 0, 20"
+                               HorizontalOptions="Center"
+                               BackgroundColor="White"/>
+            <Grid>
+                <inputLayout:SfTextInputLayout Grid.Row="0"
+                Hint="Nombre"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                    <inputLayout:SfTextInputLayout.Triggers>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.first_name.Length}" 
+                                 Value="0">
+                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="HasError" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.first_name, Converter={StaticResource IsNotNullOrEmptyConverter}}" Value="True">
+                            <Setter Property="HasError" Value="False"/>
+                        </DataTrigger>
+                    </inputLayout:SfTextInputLayout.Triggers>
+                    <Entry Text="{Binding user.first_name}" x:Name="txtNombre"/>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Grid.Row="1"
+                Hint="Apellido"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                    <inputLayout:SfTextInputLayout.Triggers>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.last_name.Length}" 
+                                 Value="0">
+                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="HasError" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.last_name, Converter={StaticResource IsNotNullOrEmptyConverter}}" Value="True">
+                            <Setter Property="HasError" Value="False"/>
+                        </DataTrigger>
+                    </inputLayout:SfTextInputLayout.Triggers>
+                    <Entry Text="{Binding user.last_name}" x:Name="txtApellido"/>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Grid.Row="2"
+                Hint="Genero"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                    <Picker SelectedItem="{Binding user.gender}" ItemDisplayBinding="{Binding user.gender}">
+                        <Picker.Items>
+                            <x:String>Masculino</x:String>
+                            <x:String>Femenino</x:String>
+                            <x:String>No identificado</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Grid.Row="3"
+                Hint="Correo"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                    <inputLayout:SfTextInputLayout.Triggers>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.mail.Length}" 
+                                 Value="0">
+                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="HasError" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.mail, Converter={StaticResource IsNotNullOrEmptyConverter}}" Value="True">
+                            <Setter Property="HasError" Value="False"/>
+                        </DataTrigger>
+                    </inputLayout:SfTextInputLayout.Triggers>
+                    <Entry Text="{Binding user.mail}" x:Name="txtCorreo" IsReadOnly="True"/>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Grid.Row="4"
+                Hint="Dirección"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                    <inputLayout:SfTextInputLayout.Triggers>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.address.Length}" 
+                                 Value="0">
+                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="HasError" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.address, Converter={StaticResource IsNotNullOrEmptyConverter}}" Value="True">
+                            <Setter Property="HasError" Value="False"/>
+                        </DataTrigger>
+                    </inputLayout:SfTextInputLayout.Triggers>
+                    <Entry Text="{Binding user.address}" x:Name="txtDireccion"/>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout Grid.Row="5"
+                Hint="Contraseña"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                    <inputLayout:SfTextInputLayout.Triggers>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.password.Length}" 
+                                 Value="0">
+                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="HasError" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding user.password, Converter={StaticResource IsNotNullOrEmptyConverter}}" Value="True">
+                            <Setter Property="HasError" Value="False"/>
+                        </DataTrigger>
+                    </inputLayout:SfTextInputLayout.Triggers>
+                    <Entry Text="{Binding user.password}" x:Name="txtContra"/>
+                </inputLayout:SfTextInputLayout>
+
+                <buttons:SfButton Text="GUARDAR" CornerRadius="25" Padding="15" FontAttributes="Bold" Margin="0,10" Grid.Row="6" Command="{Binding SaveAccount}"/>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+

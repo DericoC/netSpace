@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:viewmodel="clr-namespace:NetSpace.ViewModel" xmlns:model="clr-namespace:NetSpace.Model"
+    x:DataType="viewmodel:ReservationViewModel"
+    ios:Page.UseSafeArea="true"
+    BackgroundColor="#F8F7F9"
+    x:Class="NetSpace.View.ReservationView"
+    x:Name="Page">
+
+    <NavigationPage.TitleView>
+        <Label Text="NetSpace" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Font="Bold,24"/>
+    </NavigationPage.TitleView>
+
+    <StackLayout>
+        <Label x:Name="popUpLabel" Text=" " FontSize="1" HorizontalOptions="End"/>
+        <syncfusion:SfListView x:Name="reservationList" SelectionMode="Single"
+                    ItemsSource="{Binding reservation}"
+                    ItemSize="140" BackgroundColor="#F8F7F9">
+            <syncfusion:SfListView.LayoutManager>
+                <syncfusion:LinearLayout />
+            </syncfusion:SfListView.LayoutManager>
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate> 
+                    <Frame HasShadow="False" IsClippedToBounds="True" Padding="0" Margin="10">
+                        <StackLayout Orientation="Vertical" BackgroundColor="#F8F7F9">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="#F8F7F9" x:DataType="model:Reservation">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ReservationDetailCommand, Source={x:Reference reservationList}}" CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="60*"/>
+                                    <ColumnDefinition Width="10*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33.33"/>
+                                    <RowDefinition Height="33.33"/>
+                                    <RowDefinition Height="33.33"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout>
+                                    <Frame Padding="0" CornerRadius="15" IsClippedToBounds="True" HasShadow="False">
+                                        <Image Grid.Row="0" Grid.Column="0" MinimumWidthRequest="100" MinimumHeightRequest="110"  WidthRequest="110" HeightRequest="100" Aspect="Fill">
+                                        <Image.Source>
+                                            <UriImageSource
+                                        CacheValidity="14"
+                                        CachingEnabled="true"
+                                        Uri="{Binding place.image}"/>
+                                        </Image.Source>
+                                    </Image>
+                                    </Frame>
+                                </StackLayout>
+
+                                <Label Text="{Binding place.place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" TextColor="Black"/>
+                                <Label FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="1" TextColor="Gray" Margin="5,-5,0,0">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} m2 • ¢{1} • {2} personas">
+                                            <Binding Path="place.dimensions" />
+                                            <Binding Path="place.policy.price" />
+                                            <Binding Path="place.capacity" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label Text="{Binding date_slot, StringFormat='{}{0:MM/dd/yyyy}'}" FontAttributes="Bold" FontSize="14" Grid.Row="2" Grid.Column="1" TextColor="Gray" Margin="5,-20,0,0"/>
+                                </Grid>
+                        </StackLayout>
+                            <BoxView HeightRequest="1" BackgroundColor="#C1C1C1" HorizontalOptions="FillAndExpand" />
+                       </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+    </StackLayout>
+</ContentPage>

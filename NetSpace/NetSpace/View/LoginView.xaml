@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+        x:Class="NetSpace.View.LoginView"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+        xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+        xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+        BackgroundColor="#F8F7F9"
+        ios:Page.UseSafeArea="true"
+        Title="LogIn"
+        NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Margin="20, 20, 20, 20" Spacing="0" VerticalOptions="FillAndExpand"
+                     WidthRequest="{OnPlatform Default='-1', UWP='350'}">
+        <Grid RowSpacing="0"
+              VerticalOptions="CenterAndExpand">
+            <Label Text="Log In" HorizontalOptions="Center" Grid.Row="0" FontSize="24" FontAttributes="Bold" TextColor="Black"/>
+            <inputLayout:SfTextInputLayout Grid.Row="1"
+                Hint="Email" 
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                <inputLayout:SfTextInputLayout.Triggers>
+                    <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding p.mail.Length}" 
+                                 Value="0">
+                        <Setter Property="ErrorText" Value="Email required"/>
+                        <Setter Property="HasError" Value="True"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding p.mail, Converter={StaticResource IsNotNullOrEmptyConverter}}" Value="True">
+                        <Setter Property="HasError" Value="False"/>
+                    </DataTrigger>
+                </inputLayout:SfTextInputLayout.Triggers>
+                <Entry Keyboard="Email" Text="{Binding p.mail}" x:Name="txtMail" TextColor="Black"/>
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout Grid.Row="2"
+                Hint="Password"
+                EnablePasswordVisibilityToggle="true"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                <inputLayout:SfTextInputLayout.Triggers>
+                    <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding p.password.Length}" 
+                                 Value="0">
+                        <Setter Property="ErrorText" Value="Password required"/>
+                        <Setter Property="HasError" Value="True"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
+                                 Binding="{Binding p.password, Converter={StaticResource IsNotNullOrEmptyConverter}}" Value="True">
+                        <Setter Property="HasError" Value="False"/>
+                    </DataTrigger>
+                </inputLayout:SfTextInputLayout.Triggers>
+                <Entry IsPassword="True" Text="{Binding p.password}" x:Name="txtPassword" Keyboard="Plain" TextColor="Black"/>
+            </inputLayout:SfTextInputLayout>
+            <buttons:SfButton Grid.Row="3" Margin="50,10" Text="LOG IN" CornerRadius="25" Padding="15" FontAttributes="Bold" Command="{Binding LoginCommand}"/>
+            <StackLayout Grid.Row="4" HorizontalOptions="Center" Orientation="Horizontal">
+                <Label Text="¿No tiene cuenta?" Margin="0, 26, -8, 0" FontSize="18" TextColor="Black"/>
+                <buttons:SfButton   Command="{Binding CreateAccountCommand}"
+                                     Text="Crear cuenta"
+                                     BorderWidth="0"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     TextColor="Blue"
+                                     BackgroundColor="Transparent"
+                                     CornerRadius="2"
+                                     FontSize="18">
+
+                </buttons:SfButton>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>
