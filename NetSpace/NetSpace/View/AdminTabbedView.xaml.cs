@@ -9,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 namespace NetSpace.View
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AdminTabbedView : TabbedPage
     {
         public AdminTabbedView()

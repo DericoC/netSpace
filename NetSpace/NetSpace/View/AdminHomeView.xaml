@@ -23,9 +23,6 @@
                         <Frame HasShadow="True" IsClippedToBounds="True" Padding="0" CornerRadius="15" Margin="10">
                             <StackLayout Orientation="Horizontal" BackgroundColor="White" x:DataType="model:Reservation">
                                 <Grid>
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.PlaceDetailCommand, Source={x:Reference threeReservations}}" CommandParameter="{Binding .}"/>
-                                    </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="90*"/>
                                         <ColumnDefinition Width="5.6*"/>

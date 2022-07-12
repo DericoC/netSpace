@@ -2,10 +2,28 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="NetSpace.View.AdminPlacesView">
-    <ContentPage.IconImageSource>
-        <FontImageSource FontFamily="FASolid" Glyph="&#xf54e;" Size="20" Color="Black"/>
-    </ContentPage.IconImageSource>
+    x:Class="NetSpace.View.AdminPlacesView"
+    NavigationPage.IconColor="Black">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding SearchCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="&#xf002;"
+                    Size="20" Color="Black"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Command="{Binding MenuCommand}" x:Name="btnMenu">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="FASolid"
+                    Glyph="&#xf142;"
+                    Size="25" Color="Black"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
         <Label Text="Mis Lugares"/>
     </StackLayout>

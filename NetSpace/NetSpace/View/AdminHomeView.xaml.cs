@@ -8,7 +8,7 @@ namespace NetSpace.View
     public partial class AdminHomeView : ContentPage
     {
         public AdminHomeView()
-        {
+        {            
             InitializeComponent();
             BindingContext = new AdminHomeViewModel();
         }

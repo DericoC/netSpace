@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using NetSpace.Model;
 using NetSpace.Service;
+using NetSpace.View;
+using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
@@ -9,6 +12,7 @@ namespace NetSpace.ViewModel
     {
         public ObservableCollection<Reservation> reservations { get; set; }
         public ObservableCollection<Place> places { get; set; }
+        private Command placeDetailCommand;
         PlaceService placeService = new PlaceService();
         ReservationService reservationService = new ReservationService();
 
@@ -16,6 +20,7 @@ namespace NetSpace.ViewModel
         {
             reservations = new ObservableCollection<Reservation>();
             places = new ObservableCollection<Place>();
+            placeDetailCommand = new Command(async (p) => await loadSelectedPlaceAsync(p));
             foreach (var item in reservationService.nearestReservations())
             {
                 reservations.Add(item);
@@ -24,6 +29,16 @@ namespace NetSpace.ViewModel
             {
                 places.Add(item);
             }
+        }
+
+        async Task loadSelectedPlaceAsync(Object p)
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new PlaceView(p as Place));
+        }
+
+        public Command PlaceDetailCommand
+        {
+            get => placeDetailCommand;
         }
     }
 }
