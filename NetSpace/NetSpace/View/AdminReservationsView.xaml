@@ -16,10 +16,10 @@
     </ContentPage.IconImageSource>
 
     <StackLayout>
-        <Label x:Name="popUpLabel" Text=" " FontSize="1" HorizontalOptions="End"/>
+        <Label Text="Reservas" HorizontalTextAlignment="Start" TextColor="Black" FontSize="24" Margin="10, 20, 10, 20" FontAttributes="Bold"/>
         <syncfusion:SfListView x:Name="reservationList" SelectionMode="Single"
                     ItemsSource="{Binding reservation}"
-                    ItemSize="140" BackgroundColor="#F8F7F9">
+                    ItemSize="100" BackgroundColor="#F8F7F9">
             <syncfusion:SfListView.LayoutManager>
                 <syncfusion:LinearLayout />
             </syncfusion:SfListView.LayoutManager>
@@ -33,26 +33,26 @@
                                         <TapGestureRecognizer Command="{Binding Path=BindingContext.ReservationDetailCommand, Source={x:Reference reservationList}}" CommandParameter="{Binding .}"/>
                                     </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30*"/>
-                                        <ColumnDefinition Width="60*"/>
-                                        <ColumnDefinition Width="10*"/>
+                                        <ColumnDefinition Width="90*"/>
+                                        <ColumnDefinition Width="5.5*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="33.33"/>
-                                        <RowDefinition Height="33.33"/>
-                                        <RowDefinition Height="33.33"/>
+                                        <RowDefinition Height="33.33*"/>
+                                        <RowDefinition Height="33.33*"/>
+                                        <RowDefinition Height="33.33*"/>
                                     </Grid.RowDefinitions>
 
-                                    <Label Text="{Binding place.place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" TextColor="Black"/>
-                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="1" TextColor="Gray" Margin="5,-20,0,0">
+                                    <Label Text="{Binding place.place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" TextColor="Black"/>
+                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="0" TextColor="Gray" Margin="5,0,0,0">
                                         <Label.Text>
-                                            <MultiBinding StringFormat="{}{0} {1:MM/dd/yyyy} ">
-                                                <Binding Path="reservation.user.first_name" />
+                                            <MultiBinding StringFormat="{}{0} {1} • {2:MM/dd/yyyy} ">
+                                                <Binding Path="user.first_name"/>
+                                                <Binding Path="user.last_name"/>
                                                 <Binding Path="date_slot" />
                                             </MultiBinding>
                                         </Label.Text>
                                     </Label>
-                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="2" Grid.Column="1" TextColor="Gray" Margin="5,-5,0,0">
+                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="2" Grid.Column="0" TextColor="Gray" Margin="8,-5,0,0">
                                         <Label.Text>
                                             <MultiBinding StringFormat="{}{0} - {1}  ">
                                                 <Binding Path="time_start" />
@@ -60,6 +60,7 @@
                                             </MultiBinding>
                                         </Label.Text>
                                     </Label>
+                                    <Label Text="&#xf105;" FontFamily="FASolid" Grid.Row="1" Grid.Column="1" FontSize="25" TextColor="Black" Margin="5,0"/>
                                 </Grid>
                             </StackLayout>
                             <BoxView HeightRequest="1" BackgroundColor="#C1C1C1" HorizontalOptions="FillAndExpand" />

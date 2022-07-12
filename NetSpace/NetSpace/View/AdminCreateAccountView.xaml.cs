@@ -5,12 +5,11 @@ using Xamarin.Forms;
 
 namespace NetSpace.View
 {
-    public partial class AdminCreatePlaceView : ContentPage
+    public partial class AdminCreateAccountView : ContentPage
     {
-        public AdminCreatePlaceView()
+        public AdminCreateAccountView()
         {
             InitializeComponent();
-            //BindingContext = new AdminCreatePlaceView();
         }
     }
 }
