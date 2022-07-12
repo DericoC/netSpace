@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using NetSpace.ViewModel;
 using Xamarin.Forms;
 
 namespace NetSpace.View
@@ -10,6 +8,7 @@ namespace NetSpace.View
         public AdminReservationsView()
         {
             InitializeComponent();
+            BindingContext = new AdminReservationViewModel();
         }
     }
 }

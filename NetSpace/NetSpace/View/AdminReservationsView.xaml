@@ -11,10 +11,9 @@
     x:Class="NetSpace.View.AdminReservationsView"
     x:Name="Page">
 
-
-    <NavigationPage.TitleView>
-        <Label Text="NetSpace" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Font="Bold,24"/>
-    </NavigationPage.TitleView>
+    <ContentPage.IconImageSource>
+            <FontImageSource FontFamily="FASolid" Glyph="&#xf03a;" Size="20" Color="Black"/>
+    </ContentPage.IconImageSource>
 
     <StackLayout>
         <Label x:Name="popUpLabel" Text=" " FontSize="1" HorizontalOptions="End"/>
