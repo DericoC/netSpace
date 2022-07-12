@@ -12,7 +12,7 @@ namespace NetSpace.Service
         private readonly string UPDATE = "UPDATE policies SET policy_name = @policy_name, age_restriction = @age_restriction, deposit = @deposit, price = @price WHERE (policy_id = @id);";
         private readonly string DELETE = "DELETE FROM policies WHERE (policy_id = @id);";
         private readonly string READ = "SELECT * FROM policies;";
-        private readonly string FINDBYID = "SELECT * FROM policies WHERE ID = @ID;";
+        private readonly string FINDBYID = "SELECT * FROM policies WHERE policy_id = @ID;";
 
         public bool insert(Policy item)
         {
