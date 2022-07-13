@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using NetSpace.ViewModel;
 using Xamarin.Forms;
 
 namespace NetSpace.View
@@ -10,6 +10,7 @@ namespace NetSpace.View
         public AdminPlacesView()
         {
             InitializeComponent();
+            BindingContext = new AdminPlacesViewModel();
         }
     }
 }

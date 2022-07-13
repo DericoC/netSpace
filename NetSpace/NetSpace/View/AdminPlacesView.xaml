@@ -1,24 +1,25 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+    x:DataType="viewmodel:AdminPlacesViewModel"
     x:Class="NetSpace.View.AdminPlacesView"
     NavigationPage.IconColor="Black">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding SearchCommand}">
+        <ToolbarItem Command="{Binding GoToPoliciesList}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="FASolid"
-                    Glyph="&#xf002;"
+                    Glyph="&#xf46c;"
                     Size="20" Color="Black"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        <ToolbarItem Command="{Binding MenuCommand}" x:Name="btnMenu">
+        <ToolbarItem Command="{Binding GoToCreatePlace}" x:Name="btnMenu">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="FASolid"
-                    Glyph="&#xf142;"
+                    Glyph="&#x2b;"
                     Size="25" Color="Black"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>

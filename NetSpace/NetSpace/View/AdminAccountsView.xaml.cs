@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NetSpace.Model;
 using NetSpace.ViewModel;
 using Xamarin.Forms;
 

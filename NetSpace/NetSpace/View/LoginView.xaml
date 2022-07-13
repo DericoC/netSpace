@@ -42,7 +42,7 @@
                 <Entry Keyboard="Email" Text="{Binding p.mail}" x:Name="txtMail" TextColor="Black"/>
             </inputLayout:SfTextInputLayout>
             <inputLayout:SfTextInputLayout Grid.Row="2"
-                Hint="Password"
+                Hint="Contraseña"
                 EnablePasswordVisibilityToggle="true"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using NetSpace.Model;
+using NetSpace.ViewModel;
 using Xamarin.Forms;
 
 namespace NetSpace.View
 {
     public partial class AdminCreatePlaceView : ContentPage
     {
-        public AdminCreatePlaceView()
+        public AdminCreatePlaceView(Place p)
         {
             InitializeComponent();
-            //BindingContext = new AdminCreatePlaceView();
+            BindingContext = new AdminCreatePlaceViewModel(p);
         }
     }
 }

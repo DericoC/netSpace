@@ -6,15 +6,15 @@
     x:Class="NetSpace.View.AdminAccountsView">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding AddAccountCommand}" x:Name="btnMenu">
+        <ToolbarItem Command="{Binding LogoutCommand}" x:Name="btnMenu">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="FASolid"
-                    Glyph="&#xf2f5;"
-                    Size="25"/>
+                    Glyph="&#xf08b;"
+                    Size="21"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        <ToolbarItem Command="{Binding LogoutCommand}">
+        <ToolbarItem Command="{Binding AddAccountCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
                     FontFamily="FASolid"

@@ -143,6 +143,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="5"
+                TrailingViewPosition="Inside"
                 Hint="Administrador"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
@@ -153,9 +154,13 @@
                             <x:String>Gerente</x:String>
                         </Picker.Items>
                     </Picker>
+                    <inputLayout:SfTextInputLayout.TrailingView>
+                        <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
+                    </inputLayout:SfTextInputLayout.TrailingView>
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="6"
+                TrailingViewPosition="Inside"
                 Hint="Politica"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
@@ -166,6 +171,9 @@
                             <x:String>Gerente</x:String>
                         </Picker.Items>
                     </Picker>
+                    <inputLayout:SfTextInputLayout.TrailingView>
+                        <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
+                    </inputLayout:SfTextInputLayout.TrailingView>
                 </inputLayout:SfTextInputLayout>
 
                 <StackLayout Grid.Row="7">

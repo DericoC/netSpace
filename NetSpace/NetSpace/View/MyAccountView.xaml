@@ -77,6 +77,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="2"
+                TrailingViewPosition="Inside"
                 Hint="Genero"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
@@ -87,6 +88,9 @@
                             <x:String>No identificado</x:String>
                         </Picker.Items>
                     </Picker>
+                    <inputLayout:SfTextInputLayout.TrailingView>
+                        <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
+                    </inputLayout:SfTextInputLayout.TrailingView>
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="3"
@@ -130,6 +134,7 @@
                 <inputLayout:SfTextInputLayout Grid.Row="5"
                 Hint="Contraseña"
                 ContainerType="Outlined"
+                EnablePasswordVisibilityToggle="True"
                 OutlineCornerRadius="8">
                     <inputLayout:SfTextInputLayout.Triggers>
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -143,7 +148,7 @@
                             <Setter Property="HasError" Value="False"/>
                         </DataTrigger>
                     </inputLayout:SfTextInputLayout.Triggers>
-                    <Entry Text="{Binding user.password}" x:Name="txtContra"/>
+                    <Entry Text="{Binding user.password}" x:Name="txtContra" IsPassword="True"/>
                 </inputLayout:SfTextInputLayout>
 
                 <buttons:SfButton Text="GUARDAR" CornerRadius="25" Padding="15" FontAttributes="Bold" Margin="0,10" Grid.Row="6" Command="{Binding SaveAccount}"/>

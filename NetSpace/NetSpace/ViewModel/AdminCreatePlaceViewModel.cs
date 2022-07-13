@@ -13,11 +13,13 @@ namespace NetSpace.ViewModel
         public Command createPlace;
         private readonly SnackBarAlert alert = new SnackBarAlert();
         private PlaceService placeService = new PlaceService();
+        public bool isCreate { get; set; }
 
-        public AdminCreatePlaceViewModel()
+        public AdminCreatePlaceViewModel(Place p)
         {
             place = new Place();
             createPlace = new Command(async () => await addPlace());
+            isCreate = p == null;
         }
 
         private async Task addPlace()
