@@ -32,7 +32,7 @@ namespace NetSpace.ViewModel
 
         async Task loadSelectedReservationAsync(Reservation r)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new ReservationDetailView(r));
+            await Application.Current.MainPage.Navigation.PushAsync(new AdminReservationDetailView(r));
         }
 
         public Command ReservationDetailCommand

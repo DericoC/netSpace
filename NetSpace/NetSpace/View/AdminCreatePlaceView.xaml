@@ -101,7 +101,7 @@
                             <Setter Property="HasError" Value="False"/>
                         </DataTrigger>
                     </inputLayout:SfTextInputLayout.Triggers>
-                    <Entry Text="{Binding user.last_name}" x:Name="txtApellido"/>
+                    <Entry Text="{Binding user.last_name}" x:Name="txtApellido2"/>
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="3"

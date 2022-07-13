@@ -39,7 +39,7 @@ namespace NetSpace.ViewModel
                         await Application.Current.MainPage.Navigation.PushAsync(new HomeView());
                     } else if (ses.getUser().role == "admin")
                     {
-                        await Application.Current.MainPage.Navigation.PushAsync(new AdminCreatePlaceView());
+                        await Application.Current.MainPage.Navigation.PushAsync(new AdminTabbedView());
                     } else if (ses.getUser().role == "manager")
                     {
                         await alert.displaySnackBarAlertAsync("Este usuario es gestor. Por favor contacte al administrador.", 5, SnackBarAlert.WARNING);
