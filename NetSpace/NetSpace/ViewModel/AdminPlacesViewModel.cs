@@ -1,32 +1,38 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using NetSpace.Model;
+using NetSpace.Service;
+using NetSpace.Util;
 using NetSpace.View;
 using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
-    public class AdminPlacesViewModel
+    public class AdminPlacesViewModel : BaseViewModel
     {
         public Command createPlace;
-        public Command modifyPlace;
         public Command createPolicy;
+
+        public ObservableCollection<Place> places { get; set; }
+        PlaceService placeService = new PlaceService();
+        SnackBarAlert alert = new SnackBarAlert();
 
         public AdminPlacesViewModel()
         {
             createPlace = new Command(async () => await goToCreatePlace());
-            modifyPlace = new Command<Place>(async (p) => await goToModifyPlace(p));
             createPolicy = new Command(async () => await goToPoliciesList());
+
+            places = new ObservableCollection<Place>();
+            foreach (var item in placeService.read())
+            {
+                places.Add(item);
+            }
         }
 
         private async Task goToCreatePlace()
         {
             await Application.Current.MainPage.Navigation.PushAsync(new AdminCreatePlaceView(null));
-        }
-
-        private async Task goToModifyPlace(Place place)
-        {
-            await Application.Current.MainPage.Navigation.PushAsync(new AdminCreatePlaceView(place));
         }
 
         private async Task goToPoliciesList()
@@ -43,6 +49,21 @@ namespace NetSpace.ViewModel
         {
             get => createPolicy;
         }
+
+        public async Task<bool> deletePlaceAsync(Place p)
+        {
+            bool valido = false;
+
+            if(placeService.delete(p))
+            {
+                await alert.displaySnackBarAlertAsync("Lugar borrado.", 3, SnackBarAlert.INFORMATION);
+                valido = true;
+            } else
+            {
+                await alert.displaySnackBarAlertAsync("Ha ocurrido un error.", 3, SnackBarAlert.ERROR);
+            }
+
+            return valido;
+        }
     }
 }
-
