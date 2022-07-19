@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
-    public class AdminAccountsViewModel
+    public class AdminAccountsViewModel : BaseViewModel
     {
         public Command addAccountCommand;
         public Command modifyAccountCommand;

@@ -26,15 +26,6 @@
                 <Label Margin="20, 0, 20, 10" TextColor="black">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="QR: " FontAttributes="Bold" FontSize="20"/>
-                            <Span x:Name="lblDimensiones" FontSize="20" Text="{Binding reservationDetail.qr}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-
-                <Label Margin="20, 0, 20, 10" TextColor="black">
-                    <Label.FormattedText>
-                        <FormattedString>
                             <Span Text="Fecha: " FontAttributes="Bold" FontSize="20"/>
                             <Span x:Name="lbldate_slot" FontSize="20" Text="{Binding reservationDetail.date_slot, StringFormat='{}{0:MM/dd/yyyy}'}"/>
                         </FormattedString>
@@ -58,6 +49,10 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+
+                <StackLayout x:Name="Generando"  Spacing="0" HeightRequest="150" WidthRequest="150"  BackgroundColor="White" Margin="0,10,0,0">
+                    <Label x:Name="lblQR" Margin="20, 20, 20, 20" FontSize="24" FontAttributes="Bold" TextColor="black" IsVisible="false" Text="{Binding reservationDetail.qr}"/>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

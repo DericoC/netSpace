@@ -90,7 +90,8 @@
                     </Label.FormattedText>
                 </Label>
 
-                <buttons:SfButton Grid.Row="3" Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold" BackgroundColor="#1690F4"/>
+                <buttons:SfButton Grid.Row="3" Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold"
+                                  BackgroundColor="#1690F4" Command="{Binding GoToCalendar}"/>
 
             </StackLayout>
         </ScrollView>

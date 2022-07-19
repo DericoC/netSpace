@@ -1,6 +1,9 @@
 ﻿using System;
 using NetSpace.ViewModel;
 using NetSpace.Model;
+using Xamarin.Forms;
+using System.Threading.Tasks;
+using NetSpace.View;
 
 namespace NetSpace.ViewModel
 {
@@ -8,6 +11,7 @@ namespace NetSpace.ViewModel
     {
         public Place placeDetail { get; set; }
         public String hasRestrooms { get; set; }
+        public Command goToCalendar;
 
         public PlaceViewModel(Place p)
         {
@@ -24,6 +28,17 @@ namespace NetSpace.ViewModel
             placeDetail.policy.price = p.policy.price;
             placeDetail.policy.deposit = p.policy.deposit;
             placeDetail.policy.policy_name = p.policy.policy_name;
+            goToCalendar = new Command(async () => await moveToCalendar());
+        }
+
+        private async Task moveToCalendar()
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new CalendarView());
+        }
+
+        public Command GoToCalendar
+        {
+            get => goToCalendar;
         }
     }
 }

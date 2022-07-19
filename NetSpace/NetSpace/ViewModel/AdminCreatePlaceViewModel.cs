@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
-    public class AdminCreatePlaceViewModel
+    public class AdminCreatePlaceViewModel : BaseViewModel
     {
         public Place place { get; set; }
         public Command createPlace;

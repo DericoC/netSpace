@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    x:Class="NetSpace.View.CalendarView">
+
+    <ContentPage.Content>
+        <syncfusion:SfCalendar x:Name="calendar" InlineViewMode="Agenda" AgendaViewHeight="350" ShowInlineEvents="True"/>
+    </ContentPage.Content>
+</ContentPage>
+

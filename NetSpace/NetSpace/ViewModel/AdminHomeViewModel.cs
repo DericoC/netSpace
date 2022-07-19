@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
-    public class AdminHomeViewModel
+    public class AdminHomeViewModel : BaseViewModel
     {
         public ObservableCollection<Reservation> reservations { get; set; }
         public ObservableCollection<Place> places { get; set; }

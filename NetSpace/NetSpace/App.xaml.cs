@@ -10,7 +10,7 @@ namespace NetSpace
         public App ()
         {
             //V0.3.1
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjU3MDM0QDMyMzAyZTMxMmUzMGxCSk9rUlFDUm40c2ZYRnJUSCtxVFpxTVNjVytTRmxCSjRJUWJQNGRPNEE9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Njc5MzM2QDMyMzAyZTMyMmUzMER2L3dQV1dzMEk3VG5aR0NiUzRxRDRZV0NVSmZhMEh4NDdodHFUTmY2TGs9");
             InitializeComponent();
             NavigationPage page = new NavigationPage(new LoginView());
             page.BarTextColor = Color.Black;

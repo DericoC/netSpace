@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
-    public class AdminCreateAccountViewModel
+    public class AdminCreateAccountViewModel : BaseViewModel
     {
         public User user { get; set; }
         public Command createUser;
