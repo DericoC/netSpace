@@ -1,13 +1,134 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NetSpace.View.AdminReservationDetailView">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+            xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+            x:DataType="viewmodel:AdminReservationDetailViewModel"
+            BackgroundColor="#F8F7F9"
+            ios:Page.UseSafeArea="true"
+            x:Class="NetSpace.View.AdminReservationDetailView">
+   
     <ContentPage.Content>
-        <StackLayout x:Name="Generador">
-            <Label Text="Generador de QR"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="btnGenerarQR" Text="Generador de QR" Clicked="btnGenerarQR_Clicked"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout  Spacing="0" VerticalOptions="FillAndExpand"
+                             WidthRequest="{OnPlatform Default='-1', UWP='350'}" BackgroundColor="White">
+
+
+
+                <StackLayout x:Name="Generando"  Spacing="0" HeightRequest="150" WidthRequest="150"  BackgroundColor="White" Margin="0,10,0,0">
+                    <Label x:Name="lblName" Margin="20, 20, 20, 20" FontSize="24" FontAttributes="Bold" TextColor="black" IsVisible="false" Text="{Binding reservationDetail.qr}"/>
+                </StackLayout>
+                
+
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="ID Reserva: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblreservaciones" FontSize="20" Text="{Binding reservationDetail.reservation_id}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Comercio: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblcomercio" FontSize="20" Text="{Binding reservationDetail.business.business_name}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Nombre del Lugar: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblnombrelugar" FontSize="20" Text="{Binding reservationDetail.place.place_name}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Fecha: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lbldate_slot" FontSize="20" Text="{Binding reservationDetail.date_slot, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Hora Inicio: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lbltime_start" FontSize="20" Text="{Binding startTimeFormat}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Hora Final: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lbltime_end" FontSize="20" Text="{Binding endTimeFormat}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Deposito: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lbldeposito" FontSize="20" Text="{Binding reservationDetail.place.policy.deposit}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Precio: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblprice" FontSize="20" Text="{Binding reservationDetail.place.policy.price}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Frame CornerRadius="20" BackgroundColor="White" Margin="0,0,0,0" HasShadow="False" Padding="0,10,0,10">
+                    <Label x:Name="lblinfocliente" Margin="20, 20, 20, 20" FontSize="24" FontAttributes="Bold" TextColor="black" Text="Informacion Cliente"/>
+                </Frame>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" Color="#1690F4" Margin="20,-20,20,20"/>
+
+                <StackLayout Orientation="Horizontal" Margin="20,0,0,0">
+                    <Label TextColor="Black" Text="Nombre:" FontAttributes="Bold" FontSize="20"></Label>
+                    <Label Margin="0, 0, 20, 10" TextColor="black" FontSize="20">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="reservationDetail.user.first_name"/>
+                                <Binding Path="reservationDetail.user.last_name"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </StackLayout>
+                    
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Mail: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblmail" FontSize="20" Text="{Binding reservationDetail.user.mail}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Margin="20, 0, 20, 10" TextColor="black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="phone: " FontAttributes="Bold" FontSize="20"/>
+                            <Span x:Name="lblphone" FontSize="20" Text="{Binding reservationDetail.user.phone}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -14,21 +14,21 @@ namespace NetSpace.View
     {
         InitializeComponent();
         BindingContext = new AdminReservationDetailViewModel(r);
+        
     }
-
-    private async void btnGenerarQR_Clicked(object sender, EventArgs e)
-    {
-        qr = new ZXingBarcodeImageView
+        protected override void OnAppearing()
         {
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            VerticalOptions = LayoutOptions.FillAndExpand
-        };
-        qr.BarcodeFormat = ZXing.BarcodeFormat.QR_CODE;
-        qr.BarcodeOptions.Width = 150;
-        qr.BarcodeOptions.Width = 150;
-        qr.BarcodeValue = "https//:google.com";
-        Generador.Children.Add(qr);
+            base.OnAppearing();
+            qr = new ZXingBarcodeImageView
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            qr.BarcodeFormat = ZXing.BarcodeFormat.QR_CODE;
+            qr.BarcodeOptions.Width = 500;
+            qr.BarcodeOptions.Height = 500;
+            qr.BarcodeValue = lblName.Text;
+            Generando.Children.Add(qr);
+        }
     }
-
-  }
 }

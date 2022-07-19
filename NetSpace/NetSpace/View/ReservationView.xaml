@@ -30,7 +30,7 @@
                             <StackLayout Orientation="Horizontal" BackgroundColor="#F8F7F9" x:DataType="model:Reservation">
                             <Grid>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ReservationDetailCommand, Source={x:Reference reservationList}}" CommandParameter="{Binding .}"/>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.AdminReservationDetailCommand, Source={x:Reference reservationList}}" CommandParameter="{Binding .}"/>
                                 </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30*"/>

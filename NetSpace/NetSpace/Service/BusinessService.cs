@@ -132,8 +132,8 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(FINDBYID, this.getConnection());
-                MySqlDataReader rdr = cmd.ExecuteReader();
                 cmd.Parameters.AddWithValue("@id", id);
+                MySqlDataReader rdr = cmd.ExecuteReader();
                 PlaceService placeService = new PlaceService();
 
                 while (rdr.Read())
