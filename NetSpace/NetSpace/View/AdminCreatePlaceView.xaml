@@ -9,36 +9,25 @@
     x:DataType="viewmodel:AdminCreatePlaceViewModel"
     BackgroundColor="#F8F7F9"
     x:Class="NetSpace.View.AdminCreatePlaceView">
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
             <xct:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-
-
     <NavigationPage.TitleView>
         <Label Text="Lugar" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Font="Bold,24" Margin="-30,0,0,0"/>
     </NavigationPage.TitleView>
     <ScrollView>
         <StackLayout Margin="20, 30, 20, 20" Spacing="0"
                      WidthRequest="{OnPlatform Default='-1', UWP='350'}">
-            <sfavatar:SfAvatarView ContentType="Initials"
-                               InitialsType="DoubleCharacter"
-                               AvatarName="Dérico Cavallini"
-                               InitialsColor="DimGray"
-                               WidthRequest="120"
-                               BorderThickness="0.1"
-                               HasShadow="True"
-                               ShadowColor="LightSlateGray"
-                               FontSize="40"
-                               FontAttributes="Bold"
-                               HeightRequest="120"
-                               CornerRadius="100"
-                               Margin="0, 0, 0, 20"
-                               HorizontalOptions="Center"
-                               BackgroundColor="White"/>
+            <StackLayout HorizontalOptions="Center" Margin="0,-10,0,10" x:Name="myStackImage" BackgroundColor="White">
+                <Image x:Name="image" WidthRequest="200" HeightRequest="200" Aspect="AspectFill"> 
+                <Image.Clip>
+                    <EllipseGeometry RadiusX="90" RadiusY="90" Center="100,100"/>
+                </Image.Clip>
+            </Image>
+            </StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -68,7 +57,6 @@
                     </inputLayout:SfTextInputLayout.Triggers>
                     <Entry Text="{Binding place.place_name}" x:Name="txtNombre"/>
                 </inputLayout:SfTextInputLayout>
-
                 <inputLayout:SfTextInputLayout Grid.Row="1"
                 Hint="Descripción"
                 ContainerType="Outlined"
@@ -87,7 +75,6 @@
                     </inputLayout:SfTextInputLayout.Triggers>
                     <Entry Text="{Binding place.description}" x:Name="txtApellido"/>
                 </inputLayout:SfTextInputLayout>
-
                 <inputLayout:SfTextInputLayout Grid.Row="2"
                 Hint="Dimensiones"
                 ContainerType="Outlined"
@@ -106,7 +93,6 @@
                     </inputLayout:SfTextInputLayout.Triggers>
                     <Entry Text="{Binding place.dimensions}" x:Name="txtApellido2"/>
                 </inputLayout:SfTextInputLayout>
-
                 <inputLayout:SfTextInputLayout Grid.Row="3"
                 Hint="Capacidad"
                 ContainerType="Outlined"
@@ -125,7 +111,6 @@
                     </inputLayout:SfTextInputLayout.Triggers>
                     <Entry Text="{Binding place.capacity}" x:Name="txtCorreo" Keyboard="Email"/>
                 </inputLayout:SfTextInputLayout>
-
                 <inputLayout:SfTextInputLayout Grid.Row="4"
                 Hint="Amenidades"
                 ContainerType="Outlined"
@@ -144,7 +129,6 @@
                     </inputLayout:SfTextInputLayout.Triggers>
                     <Entry Text="{Binding place.amenities}" x:Name="txtTelefono"/>
                 </inputLayout:SfTextInputLayout>
-
                 <inputLayout:SfTextInputLayout Grid.Row="5"
                 TrailingViewPosition="Inside"
                 Hint="Administrador"
@@ -161,7 +145,6 @@
                         <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
                     </inputLayout:SfTextInputLayout.TrailingView>
                 </inputLayout:SfTextInputLayout>
-
                 <inputLayout:SfTextInputLayout Grid.Row="6"
                 TrailingViewPosition="Inside"
                 Hint="Politica"
@@ -178,19 +161,18 @@
                         <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
                     </inputLayout:SfTextInputLayout.TrailingView>
                 </inputLayout:SfTextInputLayout>
-
                 <StackLayout Grid.Row="7" RadioButtonGroup.SelectedValue="{Binding place.restrooms}" RadioButtonGroup.GroupName="Restrooms">
                     <Label Text="¿Existe relación de edad?" />
                     <RadioButton Content="Sí" BackgroundColor="Transparent" Value="True"/>
                     <RadioButton Content="No" BackgroundColor="Transparent" Value="False"/>
                 </StackLayout>
-
                 <buttons:SfButton Text="Crear Lugar" CornerRadius="25" Padding="15"
                                   FontAttributes="Bold" Margin="0,10" Grid.Row="8" Command="{Binding CreatePlace}" IsVisible="{Binding isCreate}"/>
-
                 <buttons:SfButton Text="Guardar Lugar" CornerRadius="25" Padding="15"
                                   FontAttributes="Bold" Margin="0,10" Grid.Row="8" Command="{Binding SavePlace}" IsVisible="{Binding isCreate, Converter={StaticResource InvertedBoolConverter}}"/>
             </Grid>
+            <Button Text="Pick Photo" CornerRadius="25" Padding="15" FontAttributes="Bold" Margin="0,10" BackgroundColor="#2f7cf6" TextColor="White"
+                    Clicked="OnPickPhotoButtonClicked"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

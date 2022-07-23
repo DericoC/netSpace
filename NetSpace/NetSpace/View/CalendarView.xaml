@@ -2,11 +2,13 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+    x:DataType="viewmodel:CalendarViewModel"
     x:Class="NetSpace.View.CalendarView">
 
     <ContentPage.Content>
-        <syncfusion:SfCalendar x:Name="calendar" InlineViewMode="Agenda" AgendaViewHeight="350" ShowInlineEvents="True"/>
+        <syncfusion:SfCalendar x:Name="calendar" InlineViewMode="Agenda" AgendaViewHeight="350"
+          ShowInlineEvents="True" DataSource="{Binding CalendarInlineEvents}" InlineItemTapped="Calendar_InlineItemTapped" />
     </ContentPage.Content>
 </ContentPage>
 

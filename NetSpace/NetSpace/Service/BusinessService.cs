@@ -13,6 +13,7 @@ namespace NetSpace.Service
         private readonly string DELETE = "DELETE FROM business WHERE (business_id = @id);";
         private readonly string READ = "SELECT * FROM business b, places p WHERE b.place = p.place_id;";
         private readonly string FINDBYID = "SELECT * FROM business WHERE business_id = @id;";
+        private readonly string FINDBYPLACEID = "SELECT business_id FROM business b WHERE b.place = @place_id";
 
         public bool insert(Business item)
         {
@@ -144,6 +145,38 @@ namespace NetSpace.Service
                         business.business_name = rdr.GetString("business_name");
                         business.type = rdr.GetInt32("type");
                         business.place = placeService.findById(rdr.GetInt32("place"));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+
+            return business;
+        }
+
+        public int findByPlaceId(int id)
+        {
+            int business = 0;
+            MySqlCommand cmd;
+
+            try
+            {
+                cmd = new MySqlCommand(FINDBYPLACEID, this.getConnection());
+                cmd.Parameters.AddWithValue("@place_id", id);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                PlaceService placeService = new PlaceService();
+
+                while (rdr.Read())
+                {
+                    if (rdr.HasRows)
+                    {
+                        business = rdr.GetInt32("business_id");
                     }
                 }
             }

@@ -40,5 +40,7 @@
 		<string>FontAwesomeRegular.otf</string>
 		<string>FontAwesomeSolid.otf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Permitir acceso a galeria</string>
 </dict>
 </plist>

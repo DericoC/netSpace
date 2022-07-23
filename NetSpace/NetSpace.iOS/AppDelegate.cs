@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Foundation;
 using Syncfusion.ListView.XForms.iOS;
+using Syncfusion.SfBusyIndicator.XForms.iOS;
 using Syncfusion.SfCalendar.XForms.iOS;
 using Syncfusion.XForms.iOS.EffectsView;
 using UIKit;
@@ -28,6 +29,7 @@ namespace NetSpace.iOS
             global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             SfCalendarRenderer.Init();
             LoadApplication(new App());
+            new SfBusyIndicatorRenderer();
             Syncfusion.XForms.iOS.Border.SfBorderRenderer.Init();
             Syncfusion.XForms.iOS.Buttons.SfButtonRenderer.Init();
             Syncfusion.XForms.iOS.PopupLayout.SfPopupLayoutRenderer.Init();

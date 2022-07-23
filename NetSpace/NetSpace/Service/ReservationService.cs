@@ -28,8 +28,8 @@ namespace NetSpace.Service
                 cmd.Parameters.AddWithValue("@business_id", item.business.business_id);
                 cmd.Parameters.AddWithValue("@qr", item.qr);
                 cmd.Parameters.AddWithValue("@date_slot", item.date_slot);
-                cmd.Parameters.AddWithValue("@time_start", item.time_start);
-                cmd.Parameters.AddWithValue("@time_end", item.time_end);
+                cmd.Parameters.AddWithValue("@time_start", (item.time_start.Hours * 60) + item.time_start.Minutes);
+                cmd.Parameters.AddWithValue("@time_end", (item.time_end.Hours * 60) + item.time_end.Minutes);
                 cmd.ExecuteNonQuery();
                 success = true;
             }

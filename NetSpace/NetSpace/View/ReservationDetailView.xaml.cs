@@ -27,7 +27,7 @@ namespace NetSpace.View
             qr.BarcodeFormat = ZXing.BarcodeFormat.QR_CODE;
             qr.BarcodeOptions.Width = 500;
             qr.BarcodeOptions.Height = 500;
-            qr.BarcodeValue = lblName.Text;
+            qr.BarcodeValue = lblQR.Text;
             Generando.Children.Add(qr);
         }
     }

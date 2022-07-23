@@ -4,11 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
     xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
     x:DataType="viewmodel:PlaceViewModel"
     BackgroundColor="#F8F7F9"
-    ios:Page.UseSafeArea="true"
-    x:Class="NetSpace.View.PlaceView">
+    ios:Page.UseSafeArea="False"
+    x:Class="NetSpace.View.PlaceView"> 
 
     <NavigationPage.TitleView>
         <Label Text="NetSpace" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Font="Bold,24"/>
@@ -16,9 +17,9 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Spacing="0" VerticalOptions="FillAndExpand"
+            <AbsoluteLayout VerticalOptions="Fill">
+            <StackLayout Spacing="0" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
                              WidthRequest="{OnPlatform Default='-1', UWP='350'}" BackgroundColor="White">
-
                 <Image x:Name="img" Aspect="AspectFill" Source="{Binding placeDetail.image}"></Image>
 
                 <Frame CornerRadius="20" BackgroundColor="White" Margin="0,-20,0,0" HasShadow="False" Padding="0,10,0,10">
@@ -89,11 +90,19 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-
-                <buttons:SfButton Grid.Row="3" Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold"
-                                  BackgroundColor="#1690F4" Command="{Binding GoToCalendar}"/>
-
+                <buttons:SfButton Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold"
+                                  BackgroundColor="#1690F4" Command="{Binding GoToCalendar}" VerticalOptions="EndAndExpand" HorizontalOptions="Fill"/>
             </StackLayout>
+                <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    BackgroundColor="Black" x:Name="box" IsVisible="{Binding isBusy}"
+                    Opacity="0.6"
+                    InputTransparent="false"/>
+                <busyindicator:SfBusyIndicator x:Name="busyindicator" AbsoluteLayout.LayoutFlags="PositionProportional"
+                                       AnimationType="SingleCircle" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1"
+                                       BackgroundColor="Transparent" IsBusy="{Binding isBusy}"
+                                       TextColor="Red" ViewBoxWidth="120"
+                                       Duration="2.5"/>
+            </AbsoluteLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

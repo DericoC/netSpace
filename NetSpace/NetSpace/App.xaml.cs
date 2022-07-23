@@ -9,7 +9,6 @@ namespace NetSpace
     {
         public App ()
         {
-            //V0.3.1
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Njc5MzM2QDMyMzAyZTMyMmUzMER2L3dQV1dzMEk3VG5aR0NiUzRxRDRZV0NVSmZhMEh4NDdodHFUTmY2TGs9");
             InitializeComponent();
             NavigationPage page = new NavigationPage(new LoginView());
