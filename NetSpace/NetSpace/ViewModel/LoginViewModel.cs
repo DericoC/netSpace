@@ -43,10 +43,14 @@ namespace NetSpace.ViewModel
                 {
                     if (ses.getUser().role == "Cliente")
                     {
-                        await Application.Current.MainPage.Navigation.PushAsync(new HomeView());
+                        NavigationPage home = new NavigationPage(new HomeView());
+                        home.BarTextColor = Color.Black;
+                        Application.Current.MainPage = home;
                     } else if (ses.getUser().role == "Administrador")
                     {
-                        await Application.Current.MainPage.Navigation.PushAsync(new AdminTabbedView());
+                        NavigationPage adminHome = new NavigationPage(new AdminTabbedView());
+                        adminHome.BarTextColor = Color.Black;
+                        Application.Current.MainPage = adminHome;
                     } else if (ses.getUser().role == "Manager")
                     {
                         await alert.displaySnackBarAlertAsync("Este usuario es gestor. Por favor contacte al administrador.", 5, SnackBarAlert.WARNING);

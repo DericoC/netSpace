@@ -18,6 +18,7 @@ namespace NetSpace.Service
         private readonly string READSPECIFIC = "SELECT * FROM places WHERE business_id = @business_id;";
         private readonly string FINDBYID = "SELECT * FROM places WHERE place_id = @id;";
         private readonly string BESTPLACES = "SELECT * FROM places WHERE business_id = @business_id ORDER BY rating desc LIMIT 3;";
+        private readonly string FINDBYNAMEANDDESC = "SELECT place_id FROM places WHERE place_name = @name AND description = @desc;";
 
         public bool insert(Place item)
         {
@@ -250,6 +251,41 @@ namespace NetSpace.Service
             }
 
             return place;
+        }
+
+        public int findByNameAndDescription(string name, string desc)
+        {
+            BusinessService businessService = new BusinessService();
+            UserService userService = new UserService();
+            PolicyService policyService = new PolicyService();
+            int placeId = 0;
+            MySqlCommand cmd;
+
+            try
+            {
+                cmd = new MySqlCommand(FINDBYNAMEANDDESC, this.getConnection());
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@desc", desc);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.HasRows)
+                    {
+                        placeId = rdr.GetInt32("place_id");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+
+            return placeId;
         }
 
         public List<Place> topPlaces(int business_id)

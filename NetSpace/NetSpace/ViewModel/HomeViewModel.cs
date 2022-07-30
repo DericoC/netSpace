@@ -15,26 +15,31 @@ namespace NetSpace.ViewModel
 		public Command searchCommand;
 		public Command menuCommand;
 		public Command menuOptionCommand;
+		public bool searchBarVisibility { get; set; }
+		public string search { get; set; }
 		private Command placeDetailCommand;
 		public ObservableCollection<Place> places { get; set; }
-		public ObservableCollection<PopUpMenuItem> popUpMenuItems { get; set; }
 		public bool displayPopup { get; set; }
 		PlaceService placeService = new PlaceService();
 
 		public HomeViewModel()
 		{
-			popUpMenuItems = new ObservableCollection<PopUpMenuItem>();
+			searchBarVisibility = false;
 			places = new ObservableCollection<Place>();
 			foreach (var item in placeService.read()) {
 				places.Add(item);
             }
-			popUpMenuItems.Add(new PopUpMenuItem("\uf007", "Cuenta"));
-			popUpMenuItems.Add(new PopUpMenuItem("\uf1ad", "Reservas"));
-			popUpMenuItems.Add(new PopUpMenuItem("\uf2f5", "Salir"));
 			displayPopup = false;
             menuCommand = new Command(showPopup);
             menuOptionCommand = new Command<string>(async (x) => await navigateMenuAsync(x));
 			placeDetailCommand = new Command(async (p) => await loadSelectedPlaceAsync(p));
+			searchCommand = new Command(searchShow);
+		}
+
+		private void searchShow()
+        {
+			searchBarVisibility = !searchBarVisibility;
+
 		}
 
 		private void showPopup()
@@ -55,7 +60,8 @@ namespace NetSpace.ViewModel
 				case "Salir":
 					UserSession ses = UserSession.getSession();
 					ses.reset();
-                    await Application.Current.MainPage.Navigation.PopToRootAsync();
+					displayPopup = false;
+					Application.Current.MainPage = new NavigationPage(new LoginView());
 					break;
 			}
 		}

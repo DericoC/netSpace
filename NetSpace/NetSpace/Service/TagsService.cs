@@ -103,6 +103,7 @@ namespace NetSpace.Service
                         Tags tag = new Tags();
 
                         tag.tag_id = rdr.GetInt32("tag_id");
+                        tag.name = rdr.GetString("name");
                         tag.value = rdr.GetString("value");
                         tags.Add(tag);
                     }

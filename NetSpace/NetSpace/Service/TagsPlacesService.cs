@@ -9,8 +9,10 @@ namespace NetSpace.Service
     public class TagsPlacesService : Connection, ICRUD<TagsPlaces>
     {
         private readonly string INSERT = "INSERT INTO tags_places (place_id, id_tag) VALUES (@place_id, @id_tag);";
+        private readonly string UPDATE = "UPDATE tags_places SET id_tag = @tag_change WHERE (place_id = @place_id) and (id_tag = @tag_id);";
         private readonly string DELETE = "DELETE FROM tags_places WHERE (place_id = @place_id) and (id_tag = @id_tag);";
         private readonly string READ = "SELECT * FROM tags;";
+        private readonly string FINDBYPLACE = "SELECT id_tag FROM tags_places WHERE place_id = @place_id;";
 
         public bool insert(TagsPlaces item)
         {
@@ -20,7 +22,7 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(INSERT, this.getConnection());
-                cmd.Parameters.AddWithValue("@id_tag", item.place.place_id);
+                cmd.Parameters.AddWithValue("@place_id", item.place.place_id);
                 cmd.Parameters.AddWithValue("@id_tag", item.tag.tag_id);
                 cmd.ExecuteNonQuery();
                 success = true;
@@ -39,6 +41,31 @@ namespace NetSpace.Service
         public bool update(TagsPlaces item)
         {
             throw new NotImplementedException("Update not possible. Please delete and insert new one.");
+        }
+
+        public bool update(TagsPlaces item, int newvalue)
+        {
+            bool success = false;
+            MySqlCommand cmd;
+
+            try
+            {
+                cmd = new MySqlCommand(UPDATE, this.getConnection());
+                cmd.Parameters.AddWithValue("@tag_change", newvalue);
+                cmd.Parameters.AddWithValue("@place_id", item.place.place_id);
+                cmd.Parameters.AddWithValue("@tag_id", item.tag.tag_id);
+                cmd.ExecuteNonQuery();
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+            return success;
         }
 
         public bool delete(TagsPlaces item)
@@ -99,6 +126,39 @@ namespace NetSpace.Service
             }
 
             return tagsPlaces;
+        }
+
+        public int findByPlaceId(int place_id)
+        {
+            MySqlCommand cmd;
+            List<TagsPlaces> tagsPlaces = new List<TagsPlaces>();
+            PlaceService placeService = new PlaceService();
+            int oldTag = 0;
+
+            try
+            {
+                cmd = new MySqlCommand(FINDBYPLACE, this.getConnection());
+                cmd.Parameters.AddWithValue("@place_id", place_id);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.HasRows)
+                    {
+                        oldTag = rdr.GetInt32("id_tag");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+
+            return oldTag;
         }
     }
 }

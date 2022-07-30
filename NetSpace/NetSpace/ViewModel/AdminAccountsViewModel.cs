@@ -46,7 +46,7 @@ namespace NetSpace.ViewModel
         {
             UserSession ses = UserSession.getSession();
             ses.reset();
-            await Application.Current.MainPage.Navigation.PopToRootAsync();
+            Application.Current.MainPage = new NavigationPage(new LoginView());
         }
 
         public async Task<bool> deletePlaceAsync(User u)

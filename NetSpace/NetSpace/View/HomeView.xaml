@@ -6,9 +6,11 @@
     xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:viewmodel="clr-namespace:NetSpace.ViewModel" xmlns:model="clr-namespace:NetSpace.Model"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
     x:DataType="viewmodel:HomeViewModel"
     BackgroundColor="#F8F7F9"
     NavigationPage.HasBackButton="False"
+    NavigationPage.IconColor="Black"
     x:Class="NetSpace.View.HomeView"
     x:Name="Page">
 
@@ -37,6 +39,18 @@
 
     <StackLayout>
         <Label x:Name="popUpLabel" Text=" " FontSize="1" HorizontalOptions="End"/>
+        <inputLayout:SfTextInputLayout Margin="10,0,10,-15" BackgroundColor="White" IsVisible="{Binding searchBarVisibility}"
+                Hint="Buscar"
+                WidthRequest="150"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8"
+                LeadingViewPosition="Inside">
+            <Entry Text="{Binding search}" x:Name="txtSearch" Keyboard="Plain" TextColor="Black"/>
+            <inputLayout:SfTextInputLayout.LeadingView>
+                <Label FontFamily="FASolid"
+                    Text="&#xf002;" Margin="0,14,0,0"/>
+            </inputLayout:SfTextInputLayout.LeadingView>
+        </inputLayout:SfTextInputLayout>
         <syncfusion:SfListView x:Name="placeList" SelectionMode="Single"
                     ItemsSource="{Binding places}"
                     ItemSize="130" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
@@ -90,11 +104,8 @@
                 <sfPopup:PopupView ShowFooter="False" ShowHeader="False" AnimationMode="Fade">
                     <sfPopup:PopupView.ContentTemplate>
                         <DataTemplate>
-                            <CollectionView ItemsSource="{Binding popUpMenuItems}" HeightRequest="165" WidthRequest="200">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackLayout Padding="10, 10, 0, 0" x:DataType="model:PopUpMenuItem">
-                                            <buttons:SfButton Text="{Binding name}"
+                            <StackLayout Padding="10, 10, 0, 0" x:DataType="model:PopUpMenuItem" HeightRequest="165" WidthRequest="200">
+                                <buttons:SfButton Text="Cuenta"
                                                              BorderWidth="0"
                                                              TextColor="Black"
                                                              BackgroundColor="Transparent"
@@ -103,20 +114,55 @@
                                                              ShowIcon="True"
                                                              HorizontalTextAlignment="Start"
                                                              Command="{Binding Source={x:Reference Page}, Path=BindingContext.MenuOptionCommand}"
-                                                             CommandParameter="{Binding name}">
+                                                             CommandParameter="Cuenta">
 
-                                                <buttons:SfButton.Image>
-                                                    <Image Margin="3">
-                                                        <Image.Source>
-                                                            <FontImageSource Glyph="{Binding icon}" FontFamily="FASolid" Size="16"/>
-                                                        </Image.Source>
-                                                    </Image>
-                                                </buttons:SfButton.Image>
-                                            </buttons:SfButton>
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                                    <buttons:SfButton.Image>
+                                        <Image Margin="3">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="&#xf007;" FontFamily="FASolid" Size="16"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </buttons:SfButton.Image>
+                                </buttons:SfButton>
+                                <buttons:SfButton Text="Reservas"
+                                                             BorderWidth="0"
+                                                             TextColor="Black"
+                                                             BackgroundColor="Transparent"
+                                                             CornerRadius="2"
+                                                             FontSize="20"
+                                                             ShowIcon="True"
+                                                             HorizontalTextAlignment="Start"
+                                                             Command="{Binding Source={x:Reference Page}, Path=BindingContext.MenuOptionCommand}"
+                                                             CommandParameter="Reservas">
+
+                                    <buttons:SfButton.Image>
+                                        <Image Margin="3">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="&#xf1ad;" FontFamily="FASolid" Size="16"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </buttons:SfButton.Image>
+                                </buttons:SfButton>
+                                <buttons:SfButton Text="Salir"
+                                                             BorderWidth="0"
+                                                             TextColor="Black"
+                                                             BackgroundColor="Transparent"
+                                                             CornerRadius="2"
+                                                             FontSize="20"
+                                                             ShowIcon="True"
+                                                             HorizontalTextAlignment="Start"
+                                                             Command="{Binding Source={x:Reference Page}, Path=BindingContext.MenuOptionCommand}"
+                                                             CommandParameter="Salir">
+
+                                    <buttons:SfButton.Image>
+                                        <Image Margin="3">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="&#xf2f5;" FontFamily="FASolid" Size="16"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </buttons:SfButton.Image>
+                                </buttons:SfButton>
+                            </StackLayout>
                         </DataTemplate>
                     </sfPopup:PopupView.ContentTemplate>
                 </sfPopup:PopupView>

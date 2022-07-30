@@ -45,6 +45,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <inputLayout:SfTextInputLayout Grid.Row="0"
@@ -159,15 +160,26 @@
                         <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
                     </inputLayout:SfTextInputLayout.TrailingView>
                 </inputLayout:SfTextInputLayout>
-                <StackLayout Grid.Row="7" RadioButtonGroup.SelectedValue="{Binding place.restrooms}" RadioButtonGroup.GroupName="Restrooms">
+                <inputLayout:SfTextInputLayout Grid.Row="7"
+                TrailingViewPosition="Inside"
+                Hint="Tag"
+                ContainerType="Outlined"
+                OutlineCornerRadius="8">
+                    <Picker SelectedItem="{Binding selectedTag, Mode=TwoWay}"
+                            ItemsSource="{Binding tags}" ItemDisplayBinding="{Binding name}"/>
+                    <inputLayout:SfTextInputLayout.TrailingView>
+                        <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
+                    </inputLayout:SfTextInputLayout.TrailingView>
+                </inputLayout:SfTextInputLayout>
+                <StackLayout Grid.Row="8" RadioButtonGroup.SelectedValue="{Binding place.restrooms}" RadioButtonGroup.GroupName="Restrooms">
                     <Label Text="¿Tiene baños?" />
                     <RadioButton Content="Sí" BackgroundColor="Transparent" Value="True"/>
                     <RadioButton Content="No" BackgroundColor="Transparent" Value="False"/>
                 </StackLayout>
                 <buttons:SfButton Text="Crear Lugar" CornerRadius="25" Padding="15"
-                                  FontAttributes="Bold" Margin="0,10" Grid.Row="8" Command="{Binding CreatePlace}" IsVisible="{Binding isCreate}"/>
+                                  FontAttributes="Bold" Margin="0,10" Grid.Row="9" Command="{Binding CreatePlace}" IsVisible="{Binding isCreate}"/>
                 <buttons:SfButton Text="Guardar Lugar" CornerRadius="25" Padding="15"
-                                  FontAttributes="Bold" Margin="0,10" Grid.Row="8" Command="{Binding SavePlace}" IsVisible="{Binding isCreate, Converter={StaticResource InvertedBoolConverter}}"/>
+                                  FontAttributes="Bold" Margin="0,10" Grid.Row="9" Command="{Binding SavePlace}" IsVisible="{Binding isCreate, Converter={StaticResource InvertedBoolConverter}}"/>
             </Grid>
         </StackLayout>
     </ScrollView>
