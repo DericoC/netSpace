@@ -62,7 +62,7 @@ namespace NetSpace.ViewModel
 
 		async Task loadSelectedPlaceAsync(Object p)
 		{
-			await Application.Current.MainPage.Navigation.PushAsync(new PlaceView(p as Place));
+			await Application.Current.MainPage.Navigation.PushAsync(new PlaceView(p as Place, false));
 		}
 
 		public Command PlaceDetailCommand

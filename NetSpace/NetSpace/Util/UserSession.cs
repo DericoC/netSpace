@@ -30,6 +30,7 @@ namespace NetSpace.Util
 		public void reset()
 		{
 			_singleton = null;
+			this.user = null;
 		}
 
 		public User getUser()

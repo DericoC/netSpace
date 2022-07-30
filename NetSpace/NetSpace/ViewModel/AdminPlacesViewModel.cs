@@ -13,10 +13,10 @@ namespace NetSpace.ViewModel
     {
         public Command createPlace;
         public Command createPolicy;
-
+        private UserSession ses = UserSession.getSession();
         public ObservableCollection<Place> places { get; set; }
         PlaceService placeService = new PlaceService();
-        SnackBarAlert alert = new SnackBarAlert();
+        private readonly SnackBarAlert alert = new SnackBarAlert();
 
         public AdminPlacesViewModel()
         {
@@ -24,7 +24,7 @@ namespace NetSpace.ViewModel
             createPolicy = new Command(async () => await goToPoliciesList());
 
             places = new ObservableCollection<Place>();
-            foreach (var item in placeService.read())
+            foreach (var item in placeService.readSpecificBusiness(ses.getUser().provider))
             {
                 places.Add(item);
             }
@@ -37,7 +37,7 @@ namespace NetSpace.ViewModel
 
         private async Task goToPoliciesList()
         {
-            //await Application.Current.MainPage.Navigation.PushAsync(new );
+            await Application.Current.MainPage.Navigation.PushAsync(new AdminPolicyView());
         }
 
         public Command GoToCreatePlace

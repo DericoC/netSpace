@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using NetSpace.Model;
-using NetSpace.Util;
 using NetSpace.ViewModel;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
 
 namespace NetSpace.View
 {
-    public partial class AdminAccountsView : ContentPage
+    public partial class AdminPolicyView : ContentPage
     {
-        private readonly SnackBarAlert alert = new SnackBarAlert();
         int itemIndex = -1;
         Image rightImage;
         Image leftImage;
 
-        public AdminAccountsView()
+        public AdminPolicyView()
         {
             InitializeComponent();
-            BindingContext = new AdminAccountsViewModel();
+            BindingContext = new AdminPolicyViewModel();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            this.usersList.ResetSwipe();
+            this.policyList.ResetSwipe();
         }
 
         private void ListView_SwipeStarted(object sender, Syncfusion.ListView.XForms.SwipeStartedEventArgs e)
@@ -65,16 +63,9 @@ namespace NetSpace.View
         {
             if (itemIndex >= 0)
             {
-                List<User> lista = new List<User>(((AdminAccountsViewModel)(this.BindingContext)).users);
-                if (lista[itemIndex].role != "Cliente")
-                {
-                    Navigation.PushAsync(new AdminCreateAccountView(lista[itemIndex]));
-                    this.usersList.ResetSwipe();
-                } else
-                {
-                    alert.displaySnackBarAlertAsync("No se puede editar la cuenta de un cliente", 5, SnackBarAlert.WARNING);
-                    this.usersList.ResetSwipe();
-                }
+                List<Policy> lista = new List<Policy>(((AdminPolicyViewModel)(this.BindingContext)).policies);
+                Navigation.PushAsync(new AdminCreatePolicyView(lista[itemIndex]));
+                this.policyList.ResetSwipe();
             }
         }
 
@@ -82,13 +73,13 @@ namespace NetSpace.View
         {
             if (itemIndex >= 0)
             {
-                List<User> lista = new List<User>(((AdminAccountsViewModel)(this.BindingContext)).users);
-                if (await ((AdminAccountsViewModel)(this.BindingContext)).deletePlaceAsync(lista[itemIndex]))
+                List<Policy> lista = new List<Policy>(((AdminPolicyViewModel)(this.BindingContext)).policies);
+                if (await ((AdminPolicyViewModel)(this.BindingContext)).deletePolicyAsync(lista[itemIndex]))
                 {
-                    ((AdminPlacesViewModel)(this.BindingContext)).places.RemoveAt(itemIndex);
+                    ((AdminPolicyViewModel)(this.BindingContext)).policies.RemoveAt(itemIndex);
                 }
 
-                this.usersList.ResetSwipe();
+                this.policyList.ResetSwipe();
             }
         }
     }

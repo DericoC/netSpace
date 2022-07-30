@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:model="clr-namespace:NetSpace.Model"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:model="clr-namespace:NetSpace.Model"
     x:DataType="viewmodel:AdminPlacesViewModel"
     x:Class="NetSpace.View.AdminPlacesView"
     x:Name="PlaceView"
     NavigationPage.IconColor="Black">
+
+    <NavigationPage.TitleView>
+        <Label Text="Espacios" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24"/>
+    </NavigationPage.TitleView>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding GoToPoliciesList}">
@@ -87,7 +93,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="140" />
                         </Grid.RowDefinitions>
-                        <Grid BackgroundColor="#009EDA" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0">
+                        <Grid BackgroundColor="#FE9400" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0">
                             <Grid VerticalOptions="Center" HorizontalOptions="Center">
                                 <Image BindingContextChanged="editIcon_BindingContextChanged">
                                     <Image.Source>
@@ -99,13 +105,13 @@
                                 </Image>
                             </Grid>
                         </Grid>
-                        <Grid BackgroundColor="#DC595F" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1">
+                        <Grid BackgroundColor="#FD3C30" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1">
                             <Grid VerticalOptions="Center" HorizontalOptions="Center">
                                 <Image BindingContextChanged="deleteIcon_BindingContextChanged">
                                     <Image.Source>
                                         <FontImageSource
                                             FontFamily="FASolid"
-                                            Glyph="&#xf00d;"
+                                            Glyph="&#xf2ed;"
                                             Size="25" Color="White"/>
                                     </Image.Source>
                                 </Image>

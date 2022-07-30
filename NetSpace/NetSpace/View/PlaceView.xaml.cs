@@ -8,10 +8,10 @@ namespace NetSpace.View
 {
     public partial class PlaceView : ContentPage
     {
-        public PlaceView(Place p)
+        public PlaceView(Place p, bool isAdmin)
         {
             InitializeComponent();
-            BindingContext = new PlaceViewModel(p);
+            BindingContext = new PlaceViewModel(p, isAdmin);
         }
     }
 }

@@ -6,6 +6,7 @@ using NetSpace.Model;
 using NetSpace.Service;
 using NetSpace.View;
 using Xamarin.Forms;
+using NetSpace.Util;
 
 namespace NetSpace.ViewModel
 {
@@ -15,13 +16,14 @@ namespace NetSpace.ViewModel
         public Command menuCommand;
         public Command menuOptionCommand;
         private Command reservationDetailCommand;
+        private UserSession ses = UserSession.getSession();
         public ObservableCollection<Reservation> reservation { get; set; }
         ReservationService reservationService = new ReservationService();
 
         public ReservationViewModel()
         {
             reservation = new ObservableCollection<Reservation>();
-            foreach (var item in reservationService.read())
+            foreach (var item in reservationService.readClient(ses.getUser().user_id))
             {
                 reservation.Add(item);
             }

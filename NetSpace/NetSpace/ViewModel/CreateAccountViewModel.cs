@@ -12,7 +12,7 @@ namespace NetSpace.ViewModel
     public class CreateAccountViewModel : BaseViewModel
     {
         public User user { get; set; }
-        public String rePassword { get; set; }
+        public string rePassword { get; set; }
         public Command createAccount { get; set; }
         private UserService userService = new UserService();
         private readonly SnackBarAlert alert = new SnackBarAlert();
@@ -26,7 +26,9 @@ namespace NetSpace.ViewModel
 
         private async Task saveAccountAsync()
         {
-            user.role = "client";
+            user.image = "no-image.png";
+            user.role = "Cliente";
+            user.provider = 0;
             if ((user.first_name != "" || user.first_name != null) && (user.last_name != "" || user.last_name != null) && (user.gender != "" &&user.gender != null) && (user.mail != "" || user.mail != null) && (user.phone != "" || user.phone != null) && (user.address != "" || user.address != null) && (user.password != "" ||user.password != null) && (rePassword != "" || rePassword != null))
             {
                 if (user.password == rePassword)

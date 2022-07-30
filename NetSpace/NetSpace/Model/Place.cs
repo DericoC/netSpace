@@ -6,6 +6,7 @@ namespace NetSpace.Model
     public class Place : BaseViewModel
     {
         public int place_id { get; set; }
+        public Business business { get; set; }
         public string place_name { get; set; }
         public string description { get; set; }
         public string dimensions { get; set; }
@@ -21,9 +22,10 @@ namespace NetSpace.Model
         {
         }
 
-        public Place(int place_id, string place_name, string description, string dimensions, int capacity, string amenities, string image, bool restrooms, User manager, Policy policy, int rating)
+        public Place(int place_id, Business business_id, string place_name, string description, string dimensions, int capacity, string amenities, string image, bool restrooms, User manager, Policy policy, int rating)
         {
             this.place_id = place_id;
+            this.business = business_id;
             this.place_name = place_name;
             this.description = description;
             this.dimensions = dimensions;

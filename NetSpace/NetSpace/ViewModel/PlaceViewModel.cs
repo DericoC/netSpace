@@ -13,13 +13,17 @@ namespace NetSpace.ViewModel
     public class PlaceViewModel : BaseViewModel
     {
         public Place placeDetail { get; set; }
-        public String hasRestrooms { get; set; }
+        public string hasRestrooms { get; set; }
         public bool isBusy { get; set; }
         public Command goToCalendar;
+        public bool viewAsAdmin { get; set; }
 
-        public PlaceViewModel(Place p)
+        public PlaceViewModel(Place p, bool isAdmin)
         {
+            viewAsAdmin = isAdmin;
             placeDetail = new Place();
+            placeDetail.business = new Business();
+            placeDetail.business = p.business;
             placeDetail.place_id = p.place_id;
             placeDetail.policy = new Policy();
             placeDetail.image = (string) p.GetType().GetProperty("image").GetValue(p, null);
@@ -45,21 +49,12 @@ namespace NetSpace.ViewModel
 
             await Task.Delay(100);
 
-            SnackBarAlert alert = new SnackBarAlert();
             BusinessService businessService = new BusinessService();
-            int id = businessService.findByPlaceId(placeDetail.place_id);
-            if (id != 0)
+            await Application.Current.MainPage.Navigation.PushAsync(new CalendarView(placeDetail.place_id, placeDetail.business.business_id));
+            Device.BeginInvokeOnMainThread(() =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new CalendarView(placeDetail.place_id, id));
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    isBusy = false;
-                });
-            } else
-            {
-                await alert.displaySnackBarAlertAsync("Ha ocurrido un error y ahora no es posible reservar.", 5, SnackBarAlert.ERROR);
                 isBusy = false;
-            }
+            });
         }
 
         public Command GoToCalendar

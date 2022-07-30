@@ -8,8 +8,8 @@ namespace NetSpace.Service
 {
     public class TagsService : Connection, ICRUD<Tags>
     {
-        private readonly string INSERT = "INSERT INTO tags(value) VALUES(@value);";
-        private readonly string UPDATE = "UPDATE tags SET value = @value WHERE(tag_id = @id);";
+        private readonly string INSERT = "INSERT INTO tags(name, value) VALUES(@name, @value);";
+        private readonly string UPDATE = "UPDATE tags SET name = @name, value = @value WHERE(tag_id = @id);";
         private readonly string DELETE = "DELETE FROM tags WHERE(tag_id = @id);";
         private readonly string READ = "SELECT * FROM tags;";
         private readonly string FINDBYID = "SELECT * FROM tags WHERE tag_id = @id;";
@@ -22,6 +22,7 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(INSERT, this.getConnection());
+                cmd.Parameters.AddWithValue("@name", item.name);
                 cmd.Parameters.AddWithValue("@values", item.value);
                 cmd.ExecuteNonQuery();
                 success = true;
@@ -45,6 +46,7 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(UPDATE, this.getConnection());
+                cmd.Parameters.AddWithValue("@name", item.name);
                 cmd.Parameters.AddWithValue("@value", item.value);
                 cmd.Parameters.AddWithValue("@id", item.tag_id);
                 cmd.ExecuteNonQuery();

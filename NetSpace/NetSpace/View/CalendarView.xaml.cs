@@ -21,6 +21,7 @@ namespace NetSpace.View
         public CalendarView(int placeId, int business_id)
         {
             InitializeComponent();
+            calendar.Locale = new System.Globalization.CultureInfo("ES");
             BindingContext = new CalendarViewModel(placeId);
             PlaceID = placeId;
             BusinessID = business_id;
@@ -29,29 +30,36 @@ namespace NetSpace.View
         private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
         {
             var appointment = e.InlineEvent;
-            bool answer = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString(), "Confirmar", "Cancelar");
-            if (answer)
+            if (appointment.Subject != "Ocupado")
             {
-                Reservation reservation = new Reservation();
-                reservation.user = new User();
-                reservation.place = new Place();
-                reservation.business = new Business();
-                reservation.user.user_id = ses.getUser().user_id;
-                reservation.place.place_id = PlaceID;
-                reservation.business.business_id = BusinessID;
-                reservation.qr = RandomString(10);
-                reservation.date_slot = e.SelectedDate;
-                reservation.time_start = new TimeSpan(appointment.StartTime.Hour, appointment.StartTime.Minute, 0);
-                reservation.time_end = new TimeSpan(appointment.EndTime.Hour, appointment.EndTime.Minute, 0);
+                bool answer = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString(), "Confirmar", "Cancelar");
+                if (answer)
+                {
+                    Reservation reservation = new Reservation();
+                    reservation.user = new User();
+                    reservation.place = new Place();
+                    reservation.business = new Business();
+                    reservation.user.user_id = ses.getUser().user_id;
+                    reservation.place.place_id = PlaceID;
+                    reservation.business.business_id = BusinessID;
+                    reservation.qr = RandomString(10);
+                    reservation.date_slot = e.SelectedDate;
+                    reservation.time_start = new TimeSpan(appointment.StartTime.Hour, appointment.StartTime.Minute, 0);
+                    reservation.time_end = new TimeSpan(appointment.EndTime.Hour, appointment.EndTime.Minute, 0);
 
-                if (reservationService.insert(reservation))
-                {
-                    await alert.displaySnackBarAlertAsync("Se ha realizado la reserva.", 5, SnackBarAlert.INFORMATION);
-                    await Navigation.PushAsync(new HomeView());
-                } else
-                {
-                    await alert.displaySnackBarAlertAsync("Ha ocurrido un error", 5, SnackBarAlert.ERROR);
+                    if (reservationService.insert(reservation))
+                    {
+                        Navigation.PushAsync(new HomeView());
+                        alert.displaySnackBarAlertAsync("Se ha realizado la reserva.", 5, SnackBarAlert.INFORMATION);
+                    }
+                    else
+                    {
+                        await alert.displaySnackBarAlertAsync("Ha ocurrido un error", 5, SnackBarAlert.ERROR);
+                    }
                 }
+            } else
+            {
+                await alert.displaySnackBarAlertAsync("Este espacio ya esta reservado", 2, SnackBarAlert.ERROR);
             }
         }
 
@@ -63,6 +71,7 @@ namespace NetSpace.View
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
     }
 }
 

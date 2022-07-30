@@ -5,11 +5,18 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
     x:DataType="viewmodel:PlaceViewModel"
     BackgroundColor="#F8F7F9"
     ios:Page.UseSafeArea="False"
-    x:Class="NetSpace.View.PlaceView"> 
+    x:Class="NetSpace.View.PlaceView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <NavigationPage.TitleView>
         <Label Text="NetSpace" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Font="Bold,24"/>
@@ -90,7 +97,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <buttons:SfButton Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold"
+                <buttons:SfButton Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold" IsVisible="{Binding viewAsAdmin, Converter={StaticResource InvertedBoolConverter}}"
                                   BackgroundColor="#1690F4" Command="{Binding GoToCalendar}" VerticalOptions="EndAndExpand" HorizontalOptions="Fill"/>
             </StackLayout>
                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -100,7 +107,7 @@
                 <busyindicator:SfBusyIndicator x:Name="busyindicator" AbsoluteLayout.LayoutFlags="PositionProportional"
                                        AnimationType="SingleCircle" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1"
                                        BackgroundColor="Transparent" IsBusy="{Binding isBusy}"
-                                       TextColor="Red" ViewBoxWidth="120"
+                                       TextColor="#1690F4" ViewBoxWidth="120"
                                        Duration="2.5"/>
             </AbsoluteLayout>
         </ScrollView>

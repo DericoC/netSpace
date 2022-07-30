@@ -2,18 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel" xmlns:model="clr-namespace:NetSpace.Model"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:DataType="viewmodel:AdminHomeViewModel"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#F8F7F9"
              x:Class="NetSpace.View.AdminHomeView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.IconImageSource>
         <FontImageSource FontFamily="FASolid" Glyph="&#xf015;" Size="20" Color="Black"/>
     </ContentPage.IconImageSource>
     <ScrollView>
         <StackLayout>
             <Label Text="Próximos eventos" HorizontalTextAlignment="Start" TextColor="Black" FontSize="24" Margin="10, 20, 10, 20" FontAttributes="Bold"/>
+            <Label Text="No hay eventos" HorizontalTextAlignment="Start" TextColor="Black" FontSize="18" Margin="10, 0, 10, 20" IsVisible="{Binding eventsEmpty}"/>
             <syncfusion:SfListView x:Name="threeReservations" SelectionMode="Single" IsScrollingEnabled="False"
-                    ItemsSource="{Binding reservations}" HeightRequest="360" Margin="0,-20,0,-10"
+                    ItemsSource="{Binding reservations}" HeightRequest="360" Margin="0,-20,0,-10" IsVisible="{Binding eventsEmpty, Converter={StaticResource InvertedBoolConverter}}"
                     ItemSize="120" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
                 <syncfusion:SfListView.LayoutManager>
                     <syncfusion:LinearLayout />
@@ -23,6 +32,9 @@
                         <Frame HasShadow="True" IsClippedToBounds="True" Padding="0" CornerRadius="15" Margin="10">
                             <StackLayout Orientation="Horizontal" BackgroundColor="White" x:DataType="model:Reservation">
                                 <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.ReservationDetailCommand, Source={x:Reference threeReservations}}" CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="90*"/>
                                         <ColumnDefinition Width="5.6*"/>
@@ -59,8 +71,9 @@
                 </syncfusion:SfListView.ItemTemplate>
             </syncfusion:SfListView>
             <Label Text="Mejor desempeño" HorizontalTextAlignment="Start" TextColor="Black" FontSize="24" Margin="10, 25, 10, 20" FontAttributes="Bold"/>
+            <Label Text="No hay espacios" HorizontalTextAlignment="Start" TextColor="Black" FontSize="18" Margin="10, 0, 10, 20" IsVisible="{Binding placesEmpty}"/>
             <syncfusion:SfListView x:Name="topPlaces" SelectionMode="Single"
-                    ItemsSource="{Binding places}" IsScrollingEnabled="False" Margin="0,-20,0,0"
+                    ItemsSource="{Binding places}" IsScrollingEnabled="False" Margin="0,-20,0,0" IsVisible="{Binding placesEmpty, Converter={StaticResource InvertedBoolConverter}}"
                     ItemSize="120" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
                 <syncfusion:SfListView.LayoutManager>
                     <syncfusion:LinearLayout />

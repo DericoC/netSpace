@@ -60,7 +60,7 @@
                 </inputLayout:SfTextInputLayout.Triggers>
                 <Entry IsPassword="True" Text="{Binding p.password}" x:Name="txtPassword" Keyboard="Plain" TextColor="Black"/>
             </inputLayout:SfTextInputLayout>
-            <buttons:SfButton Grid.Row="3" Margin="50,10" Text="LOG IN" CornerRadius="25" Padding="15" FontAttributes="Bold" Command="{Binding LoginCommand}"/>
+            <buttons:SfButton Grid.Row="3" Margin="50,10" Text="{Binding loginBtnText}" CornerRadius="25" Padding="15" FontAttributes="Bold" Command="{Binding LoginCommand}"/>
             <StackLayout Grid.Row="4" HorizontalOptions="Center" Orientation="Horizontal">
                 <Label Text="¿No tiene cuenta?" Margin="0, 26, -8, 0" FontSize="18" TextColor="Black"/>
                 <buttons:SfButton   Command="{Binding CreateAccountCommand}"

@@ -26,7 +26,11 @@ namespace NetSpace.ViewModel
         {
             if (service.update(user))
             {
+                Application.Current.MainPage.Navigation.PopAsync();
                 await alert.displaySnackBarAlertAsync("Cuenta actualizada", 5, SnackBarAlert.INFORMATION);
+            } else
+            {
+                await alert.displaySnackBarAlertAsync("Ha ocurrido un error. Intente mas tarde.", 5, SnackBarAlert.ERROR);
             }
         }
 

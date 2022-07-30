@@ -12,8 +12,10 @@ namespace NetSpace.Service
         private readonly string UPDATE = "UPDATE reservations SET user_id = @user_id, place_id = @place_id, business_id = @business_id, qr = @qr, date_slot = @date_slot, time_start = @time_start, time_end = @time_end WHERE(reservation_id = @id);";
         private readonly string DELETE = "DELETE FROM reservations WHERE(reservation_id = @id);";
         private readonly string READ = "SELECT * FROM reservations;";
+        private readonly string READSPECIFIC = "SELECT * FROM reservations WHERE business_id = @business_id;";
+        private readonly string READCLIENTSPECIFIC = "SELECT * FROM reservations WHERE user_id = @client_id;";
         private readonly string FINDBYID = "SELECT * FROM reservations WHERE reservation_id = @id;";
-        private readonly string NEARESTRESERVATIONS = "SELECT * FROM reservations WHERE business_id = 9 AND date_slot > NOW() ORDER BY 6 asc;";
+        private readonly string NEARESTRESERVATIONS = "SELECT * FROM reservations WHERE business_id = @business_id AND date_slot > NOW() ORDER BY 6 asc LIMIT 3;";
 
         public bool insert(Reservation item)
         {
@@ -141,6 +143,96 @@ namespace NetSpace.Service
             return reservations;
         }
 
+        public List<Reservation> readSpecific(int business_id)
+        {
+            MySqlCommand cmd;
+            List<Reservation> reservations = new List<Reservation>();
+            UserService userService = new UserService();
+            PlaceService placeService = new PlaceService();
+            BusinessService businessService = new BusinessService();
+            TimeConverter timeConverter = new TimeConverter();
+
+            try
+            {
+                cmd = new MySqlCommand(READSPECIFIC, this.getConnection());
+                cmd.Parameters.AddWithValue("@business_id", business_id);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.HasRows)
+                    {
+                        Reservation r = new Reservation();
+                        r.reservation_id = rdr.GetInt32("reservation_id");
+                        r.user = userService.findById(rdr.GetInt32("user_id"));
+                        r.place = placeService.findById(rdr.GetInt32("place_id"));
+                        r.business = businessService.findById(rdr.GetInt32("business_id"));
+                        r.qr = rdr.GetString("qr");
+                        r.date_slot = rdr.GetDateTime("date_slot");
+                        r.time_start = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_start"));
+                        r.time_end = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_end"));
+
+                        reservations.Add(r);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+
+            return reservations;
+        }
+
+        public List<Reservation> readClient(int client_id)
+        {
+            MySqlCommand cmd;
+            List<Reservation> reservations = new List<Reservation>();
+            UserService userService = new UserService();
+            PlaceService placeService = new PlaceService();
+            BusinessService businessService = new BusinessService();
+            TimeConverter timeConverter = new TimeConverter();
+
+            try
+            {
+                cmd = new MySqlCommand(READCLIENTSPECIFIC, this.getConnection());
+                cmd.Parameters.AddWithValue("@client_id", client_id);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.HasRows)
+                    {
+                        Reservation r = new Reservation();
+                        r.reservation_id = rdr.GetInt32("reservation_id");
+                        r.user = userService.findById(rdr.GetInt32("user_id"));
+                        r.place = placeService.findById(rdr.GetInt32("place_id"));
+                        r.business = businessService.findById(rdr.GetInt32("business_id"));
+                        r.qr = rdr.GetString("qr");
+                        r.date_slot = rdr.GetDateTime("date_slot");
+                        r.time_start = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_start"));
+                        r.time_end = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_end"));
+
+                        reservations.Add(r);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+
+            return reservations;
+        }
+
         public Reservation findById(int id)
         {
             UserService userService = new UserService();
@@ -183,7 +275,7 @@ namespace NetSpace.Service
             return reservation;
         }
 
-        public List<Reservation> nearestReservations()
+        public List<Reservation> nearestReservations(int business_id)
         {
             MySqlCommand cmd;
             List<Reservation> reservations = new List<Reservation>();
@@ -195,6 +287,7 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(NEARESTRESERVATIONS, this.getConnection());
+                cmd.Parameters.AddWithValue("@bussiness_id", business_id);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())

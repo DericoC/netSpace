@@ -8,7 +8,16 @@
 
     <ContentPage.Content>
         <syncfusion:SfCalendar x:Name="calendar" InlineViewMode="Agenda" AgendaViewHeight="350"
-          ShowInlineEvents="True" DataSource="{Binding CalendarInlineEvents}" InlineItemTapped="Calendar_InlineItemTapped" />
+          ShowInlineEvents="True" DataSource="{Binding CalendarInlineEvents}" InlineItemTapped="Calendar_InlineItemTapped">
+            <syncfusion:SfCalendar.MonthViewSettings>
+                <syncfusion:MonthViewSettings TodayBorderColor="#ec5446"
+                                              TodaySelectionBackgroundColor="#ec5446"
+                                              DateSelectionColor="Black"
+                                              SelectionRadius="13"
+                                              AgendaSelectedDateColor="Black"
+                                              DayFontAttributes="Bold"/>
+            </syncfusion:SfCalendar.MonthViewSettings>
+        </syncfusion:SfCalendar>
     </ContentPage.Content>
 </ContentPage>
 

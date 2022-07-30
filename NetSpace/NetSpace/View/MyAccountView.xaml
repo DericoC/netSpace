@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
-    xmlns:sfavatar="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
+    xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
     x:DataType="viewmodel:MyAccountViewModel"
     BackgroundColor="#F8F7F9"
@@ -20,23 +20,25 @@
         <Label Text="NetSpace" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Font="Bold,24"/>
     </NavigationPage.TitleView>
     <ScrollView>
-        <StackLayout Margin="20, 30, 20, 20" Spacing="0"
+        <AbsoluteLayout VerticalOptions="Fill">
+            <StackLayout Margin="20, 30, 20, 20" Spacing="0"
                      WidthRequest="{OnPlatform Default='-1', UWP='350'}">
-            <sfavatar:SfAvatarView ContentType="Initials"
-                               InitialsType="DoubleCharacter"
-                               AvatarName="Dérico Cavallini"
-                               InitialsColor="DimGray"
-                               WidthRequest="120"
-                               BorderThickness="0.1"
-                               HasShadow="True"
-                               ShadowColor="LightSlateGray"
-                               FontSize="40"
-                               FontAttributes="Bold"
-                               HeightRequest="120"
-                               CornerRadius="100"
-                               Margin="0, 0, 0, 20"
-                               HorizontalOptions="Center"
-                               BackgroundColor="White"/>
+            <AbsoluteLayout HorizontalOptions="Center">
+                <StackLayout Margin="0,-10,0,20" x:Name="myStackImage">
+                    <Frame CornerRadius="80" HeightRequest="160" WidthRequest="160" HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
+                        <Image x:Name="image" Aspect="AspectFill" Source="{Binding user.image}"/>
+                    </Frame>
+                </StackLayout>
+                <buttons:SfButton x:Name="SfButton" ShowIcon="True" CornerRadius="25" Clicked="OnPickPhotoButtonClicked" BackgroundColor="DimGray"
+                                  HeightRequest="45" WidthRequest="45" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,0.83,42,42">
+                    <buttons:SfButton.ImageSource>
+                        <FontImageSource
+                            FontFamily="FASolid"
+                            Glyph="&#x2b;"
+                            Size="15" Color="White"/>
+                    </buttons:SfButton.ImageSource>
+                </buttons:SfButton>
+            </AbsoluteLayout>
             <Grid>
                 <inputLayout:SfTextInputLayout Grid.Row="0"
                 Hint="Nombre"
@@ -154,6 +156,16 @@
                 <buttons:SfButton Text="GUARDAR" CornerRadius="25" Padding="15" FontAttributes="Bold" Margin="0,10" Grid.Row="6" Command="{Binding SaveAccount}"/>
             </Grid>
         </StackLayout>
+            <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    BackgroundColor="Black" x:Name="box"
+                    Opacity="0.6"
+                    InputTransparent="false"/>
+            <busyindicator:SfBusyIndicator x:Name="busyindicator" AbsoluteLayout.LayoutFlags="PositionProportional"
+                                       AnimationType="SingleCircle" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#1690F4" ViewBoxWidth="120"
+                                       Duration="2.5"/>
+        </AbsoluteLayout>
     </ScrollView>
 </ContentPage>
 

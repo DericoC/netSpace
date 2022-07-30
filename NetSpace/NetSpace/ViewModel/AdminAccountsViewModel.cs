@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using NetSpace.Model;
+using NetSpace.Service;
 using NetSpace.Util;
 using NetSpace.View;
 using Xamarin.Forms;
@@ -12,12 +14,22 @@ namespace NetSpace.ViewModel
         public Command addAccountCommand;
         public Command modifyAccountCommand;
         public Command logoutCommand;
+        private UserSession ses = UserSession.getSession();
+        public ObservableCollection<User> users { get; set; }
+        private UserService userService = new UserService();
+        private readonly SnackBarAlert alert = new SnackBarAlert();
 
         public AdminAccountsViewModel()
         {
             addAccountCommand = new Command(async () => await goToCreateAccount());
             modifyAccountCommand = new Command<User>(async (u) => await goToModifyAccount(u));
             logoutCommand = new Command(async () => await logoutAsync());
+
+            users = new ObservableCollection<User>();
+            foreach (var item in userService.readSpecific(ses.getUser().provider))
+            {
+                users.Add(item);
+            }
         }
 
         private async Task goToCreateAccount()
@@ -35,6 +47,23 @@ namespace NetSpace.ViewModel
             UserSession ses = UserSession.getSession();
             ses.reset();
             await Application.Current.MainPage.Navigation.PopToRootAsync();
+        }
+
+        public async Task<bool> deletePlaceAsync(User u)
+        {
+            bool valido = false;
+
+            if (userService.delete(u))
+            {
+                await alert.displaySnackBarAlertAsync("Lugar borrado.", 3, SnackBarAlert.INFORMATION);
+                valido = true;
+            }
+            else
+            {
+                await alert.displaySnackBarAlertAsync("Ha ocurrido un error.", 3, SnackBarAlert.ERROR);
+            }
+
+            return valido;
         }
 
         public Command AddAccountCommand

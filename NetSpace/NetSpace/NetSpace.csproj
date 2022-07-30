@@ -24,6 +24,7 @@
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="20.2.0.39" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Model\" />
@@ -45,6 +46,7 @@
     <None Remove="Syncfusion.Xamarin.SfPopupLayout" />
     <None Remove="MvvmLight" />
     <None Remove="Syncfusion.Xamarin.SfBusyIndicator" />
+    <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

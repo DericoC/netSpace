@@ -9,6 +9,7 @@ namespace NetSpace.ViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
+        public string loginBtnText { get; set; }
         public User p { get; set; }
         UserSession ses;
         private UserService service = new UserService();
@@ -20,27 +21,33 @@ namespace NetSpace.ViewModel
 
         public LoginViewModel()
         {
+            loginBtnText = "Log In";
             p = new User();
-            ses = UserSession.getSession();
             loginCommand = new Command(async () => await loginAsync());
             createAccountCommand = new Command(async () => await goToCreateAccountAsync());
         }
 
         async Task loginAsync()
         {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                loginBtnText = "Cargando...";
+            });
+            await Task.Delay(100);
+            ses = UserSession.getSession();
             if ((p.password != null || p.password != "") && (p.mail != null || p.mail == ""))
             {
                 ses.getUser().mail = p.mail;
                 ses.getUser().password = p.password;
                 if (service.login(ses))
                 {
-                    if (ses.getUser().role == "client")
+                    if (ses.getUser().role == "Cliente")
                     {
                         await Application.Current.MainPage.Navigation.PushAsync(new HomeView());
-                    } else if (ses.getUser().role == "admin")
+                    } else if (ses.getUser().role == "Administrador")
                     {
                         await Application.Current.MainPage.Navigation.PushAsync(new AdminTabbedView());
-                    } else if (ses.getUser().role == "manager")
+                    } else if (ses.getUser().role == "Manager")
                     {
                         await alert.displaySnackBarAlertAsync("Este usuario es gestor. Por favor contacte al administrador.", 5, SnackBarAlert.WARNING);
                     } else
@@ -58,6 +65,10 @@ namespace NetSpace.ViewModel
                 mailErrorMsg = p.mail == null || p.mail.Length == 0 ? "Email required" : "";
                 passErrorMsg = p.password == null ? "Password required" : "";
             }
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                loginBtnText = "Log In";
+            });
         }
 
         async Task goToCreateAccountAsync()
