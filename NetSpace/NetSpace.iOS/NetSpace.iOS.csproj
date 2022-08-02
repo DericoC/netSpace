@@ -128,7 +128,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="PropertyChanged.Fody">
       <Version>3.4.1</Version>
@@ -137,19 +137,19 @@
       <Version>2.1.11</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>20.2.0.39</Version>
+      <Version>20.2.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>20.2.0.39</Version>
+      <Version>20.2.0.40</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
-      <Version>20.2.0.39</Version>
+      <Version>20.2.0.40</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
       <Version>2.0.4</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
-      <Version>20.2.0.39</Version>
+      <Version>20.2.0.40</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net.Mobile">
       <Version>2.4.1</Version>
@@ -158,10 +158,13 @@
       <Version>2.4.1</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator">
-      <Version>20.2.0.39</Version>
+      <Version>20.2.0.40</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
+      <Version>20.2.0.40</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -175,6 +178,8 @@
     <BundleResource Include="Resources\FontAwesomeBrands.otf" />
     <BundleResource Include="Resources\FontAwesomeSolid.otf" />
     <BundleResource Include="Resources\FontAwsomeRegular.otf" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

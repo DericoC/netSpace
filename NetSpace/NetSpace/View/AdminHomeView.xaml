@@ -74,7 +74,7 @@
             <Label Text="No hay espacios" HorizontalTextAlignment="Start" TextColor="Black" FontSize="18" Margin="10, 0, 10, 20" IsVisible="{Binding placesEmpty}"/>
             <syncfusion:SfListView x:Name="topPlaces" SelectionMode="Single"
                     ItemsSource="{Binding places}" IsScrollingEnabled="False" Margin="0,-20,0,0" IsVisible="{Binding placesEmpty, Converter={StaticResource InvertedBoolConverter}}"
-                    ItemSize="120" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
+                    ItemSize="130" BackgroundColor="#F8F7F9" SelectionBackgroundColor="#F8F7F9">
                 <syncfusion:SfListView.LayoutManager>
                     <syncfusion:LinearLayout />
                 </syncfusion:SfListView.LayoutManager>
@@ -92,9 +92,10 @@
                                         <ColumnDefinition Width="6*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="0.33*"/>
-                                        <RowDefinition Height="0.33*"/>
-                                        <RowDefinition Height="0.33*"/>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
                                     </Grid.RowDefinitions>
                                     <StackLayout>
                                         <Image Grid.Row="0" Grid.Column="0" MinimumWidthRequest="110" HeightRequest="110" WidthRequest="115" Aspect="Fill">
@@ -108,7 +109,7 @@
                                     </StackLayout>
 
                                     <Label Text="{Binding place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="5,10,0,0" TextColor="black"/>
-                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="1" TextColor="Gray" Margin="5,5,0,0">
+                                    <Label FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="1" TextColor="Gray" Margin="5,0,0,0">
                                         <Label.Text>
                                             <MultiBinding StringFormat="{}{0} {1} • {2} ">
                                                 <Binding Path="manager.first_name"/>
@@ -117,10 +118,11 @@
                                             </MultiBinding>
                                         </Label.Text>
                                     </Label>
-                                    <Label Text="&#xf005;" FontFamily="FASolid" Grid.Row="2" Grid.Column="1" FontSize="14" TextColor="Red" Margin="5,0"/>
+                                    <Label Text="&#xf005;" FontFamily="FASolid" Grid.Row="2" Grid.Column="1" FontSize="14" TextColor="#F9A007" Margin="5,0"/>
                                     <Label Text="{Binding rating}" Grid.Row="2" Grid.Column="1" Margin="25, 0, 0, 0" FontSize="14" />
-                                    <Label Text="&#xf105;" FontFamily="FASolid" Grid.Row="1" Grid.Column="2" FontSize="25" TextColor="Black" Margin="5,0"/>
-
+                                    <Label Text="&#xf105;" FontFamily="FASolid" Grid.Row="2" Grid.Column="2" FontSize="25" TextColor="Black" Margin="5,-15,0,0"/>
+                                    <Label Text="{Binding tagsString}" Grid.Row="3" Grid.Column="1" Margin="26, 0, 0, 0" FontSize="14" />
+                                    <Label Text="&#xf02c;" FontFamily="FASolid" Grid.Row="3" Grid.Column="1" FontSize="15" TextColor="#333333" Margin="5, 1.5, 0, 0" />
                                 </Grid>
                             </StackLayout>
                         </Frame>

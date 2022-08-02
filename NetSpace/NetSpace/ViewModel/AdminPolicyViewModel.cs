@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
-    public class AdminPolicyViewModel
+    public class AdminPolicyViewModel : BaseViewModel
     {
         public Command createPolicy;
         public ObservableCollection<Policy> policies { get; set; }

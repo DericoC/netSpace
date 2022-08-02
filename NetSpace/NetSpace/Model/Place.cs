@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NetSpace.ViewModel;
 
 namespace NetSpace.Model
@@ -17,15 +18,17 @@ namespace NetSpace.Model
         public User manager { get; set; }
         public Policy policy { get; set; }
         public int rating { get; set; }
+        public List<Tags> tags { get; set; }
+        public String tagsString { get; set; }
 
         public Place()
         {
         }
 
-        public Place(int place_id, Business business_id, string place_name, string description, string dimensions, int capacity, string amenities, string image, bool restrooms, User manager, Policy policy, int rating)
+        public Place(int place_id, Business business, string place_name, string description, string dimensions, int capacity, string amenities, string image, bool restrooms, User manager, Policy policy, int rating, List<Tags> tags, string tagsString)
         {
             this.place_id = place_id;
-            this.business = business_id;
+            this.business = business;
             this.place_name = place_name;
             this.description = description;
             this.dimensions = dimensions;
@@ -36,6 +39,8 @@ namespace NetSpace.Model
             this.manager = manager;
             this.policy = policy;
             this.rating = rating;
+            this.tags = tags;
+            this.tagsString = tagsString;
         }
     }
 }

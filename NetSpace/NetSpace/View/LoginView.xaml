@@ -6,7 +6,7 @@
         xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
         xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
         xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+        xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
         BackgroundColor="#F8F7F9"
         ios:Page.UseSafeArea="true"
         Title="LogIn"
@@ -18,13 +18,19 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Margin="20, 20, 20, 20" Spacing="0" VerticalOptions="FillAndExpand"
+    <StackLayout Margin="20, 0, 20, 20" Spacing="0" VerticalOptions="FillAndExpand"
                      WidthRequest="{OnPlatform Default='-1', UWP='350'}">
-        <Grid RowSpacing="0"
-              VerticalOptions="CenterAndExpand">
-            <Label Text="Log In" HorizontalOptions="Center" Grid.Row="0" FontSize="24" FontAttributes="Bold" TextColor="Black"/>
+        <Grid RowSpacing="0" VerticalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+            <Image Source="logo.png" HeightRequest="140"/>
             <inputLayout:SfTextInputLayout Grid.Row="1"
-                Hint="Email" 
+                Hint="Email" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                 <inputLayout:SfTextInputLayout.Triggers>
@@ -42,7 +48,7 @@
                 <Entry Keyboard="Email" Text="{Binding p.mail}" x:Name="txtMail" TextColor="Black"/>
             </inputLayout:SfTextInputLayout>
             <inputLayout:SfTextInputLayout Grid.Row="2"
-                Hint="Contraseña"
+                Hint="Contraseña" FocusedColor="#333333"
                 EnablePasswordVisibilityToggle="true"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
@@ -58,17 +64,17 @@
                         <Setter Property="HasError" Value="False"/>
                     </DataTrigger>
                 </inputLayout:SfTextInputLayout.Triggers>
-                <Entry IsPassword="True" Text="{Binding p.password}" x:Name="txtPassword" Keyboard="Plain" TextColor="Black"/>
+                <Entry IsPassword="True" Text="{Binding p.password}" x:Name="txtPassword" Keyboard="Plain" TextColor="Black" />
             </inputLayout:SfTextInputLayout>
-            <buttons:SfButton Grid.Row="3" Margin="50,10" Text="{Binding loginBtnText}" CornerRadius="25" Padding="15" FontAttributes="Bold" Command="{Binding LoginCommand}"/>
+            <buttons:SfButton Grid.Row="3" Margin="50,10" Text="{Binding loginBtnText}" CornerRadius="25" Padding="15" FontAttributes="Bold" Command="{Binding LoginCommand}" BackgroundColor="#333333" TextColor="White" />
             <StackLayout Grid.Row="4" HorizontalOptions="Center" Orientation="Horizontal">
                 <Label Text="¿No tiene cuenta?" Margin="0, 26, -8, 0" FontSize="18" TextColor="Black"/>
                 <buttons:SfButton   Command="{Binding CreateAccountCommand}"
                                      Text="Crear cuenta"
-                                     BorderWidth="0"
+                                     BorderWidth="0" FontAttributes="Bold"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
-                                     TextColor="Blue"
+                                     TextColor="#F9A007"
                                      BackgroundColor="Transparent"
                                      CornerRadius="2"
                                      FontSize="18">

@@ -15,7 +15,7 @@
     x:Name="Page">
 
     <NavigationPage.TitleView>
-        <Label Text="NetSpace" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24"/>
+        <Label Text="NetSpace" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24" TextColor="Black"/>
     </NavigationPage.TitleView>
 
     <ContentPage.ToolbarItems>
@@ -24,7 +24,7 @@
                 <FontImageSource
                     FontFamily="FASolid"
                     Glyph="&#xf002;"
-                    Size="20"/>
+                    Size="20" Color="Black"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem Command="{Binding MenuCommand}" x:Name="btnMenu">
@@ -32,7 +32,7 @@
                 <FontImageSource
                     FontFamily="FASolid"
                     Glyph="&#xf142;"
-                    Size="25"/>
+                    Size="25" Color="Black"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -40,12 +40,12 @@
     <StackLayout>
         <Label x:Name="popUpLabel" Text=" " FontSize="1" HorizontalOptions="End"/>
         <inputLayout:SfTextInputLayout Margin="10,0,10,-15" BackgroundColor="White" IsVisible="{Binding searchBarVisibility}"
-                Hint="Buscar"
+                Hint="Busca por nombre o tags"
                 WidthRequest="150"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8"
                 LeadingViewPosition="Inside">
-            <Entry Text="{Binding search}" x:Name="txtSearch" Keyboard="Plain" TextColor="Black"/>
+            <Entry Text="{Binding search}" x:Name="txtSearch" Keyboard="Plain" TextColor="Black" TextChanged="txtSearch_TextChanged"/>
             <inputLayout:SfTextInputLayout.LeadingView>
                 <Label FontFamily="FASolid"
                     Text="&#xf002;" Margin="0,14,0,0"/>
@@ -71,6 +71,7 @@
                                     <ColumnDefinition Width="10*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.5*"/>
                                     <RowDefinition Height="0.33*"/>
                                     <RowDefinition Height="0.33*"/>
                                     <RowDefinition Height="0.33*"/>
@@ -88,9 +89,11 @@
 
                                 <Label Text="{Binding place_name}" FontAttributes="Bold" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="5,10,0,0" TextColor="black"/>
                                 <Label Text="{Binding description}" FontAttributes="Bold" FontSize="14" Grid.Row="1" Grid.Column="1" TextColor="Gray" Margin="5,0"/>
-                                <Label Text="&#xf005;" FontFamily="FASolid" Grid.Row="2" Grid.Column="1" FontSize="14" TextColor="Red" Margin="5,0"/>
+                                <Label Text="&#xf005;" FontFamily="FASolid" Grid.Row="2" Grid.Column="1" FontSize="14" TextColor="#F9A007" Margin="5,0"/>
                                 <Label Text="{Binding rating}" Grid.Row="2" Grid.Column="1" Margin="25, 0, 0, 0" FontSize="14" />
                                 <Label Text="&#xf061;" FontFamily="FASolid" Grid.Row="2" Grid.Column="2" FontSize="20" TextColor="black"/>
+                                <Label Text="{Binding tagsString}" Grid.Row="3" Grid.Column="1" Margin="26, 0, 0, 0" FontSize="14" />
+                                <Label Text="&#xf02c;" FontFamily="FASolid" Grid.Row="3" Grid.Column="1" FontSize="15" TextColor="#333333" Margin="5, 1.5, 0, 0" />
 
                             </Grid>
                         </StackLayout>
@@ -119,7 +122,7 @@
                                     <buttons:SfButton.Image>
                                         <Image Margin="3">
                                             <Image.Source>
-                                                <FontImageSource Glyph="&#xf007;" FontFamily="FASolid" Size="16"/>
+                                                <FontImageSource Glyph="&#xf007;" FontFamily="FASolid" Size="16" Color="#333333"/>
                                             </Image.Source>
                                         </Image>
                                     </buttons:SfButton.Image>
@@ -138,7 +141,7 @@
                                     <buttons:SfButton.Image>
                                         <Image Margin="3">
                                             <Image.Source>
-                                                <FontImageSource Glyph="&#xf1ad;" FontFamily="FASolid" Size="16"/>
+                                                <FontImageSource Glyph="&#xf1ad;" FontFamily="FASolid" Size="16" Color="#333333"/>
                                             </Image.Source>
                                         </Image>
                                     </buttons:SfButton.Image>
@@ -157,7 +160,7 @@
                                     <buttons:SfButton.Image>
                                         <Image Margin="3">
                                             <Image.Source>
-                                                <FontImageSource Glyph="&#xf2f5;" FontFamily="FASolid" Size="16"/>
+                                                <FontImageSource Glyph="&#xf2f5;" FontFamily="FASolid" Size="16" Color="#333333"/>
                                             </Image.Source>
                                         </Image>
                                     </buttons:SfButton.Image>

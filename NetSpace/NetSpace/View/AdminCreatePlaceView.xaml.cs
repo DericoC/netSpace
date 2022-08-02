@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using NetSpace.Model;
 using NetSpace.Service;
 using NetSpace.ViewModel;
@@ -47,6 +50,13 @@ namespace NetSpace.View
                 }
                 return ms.ToArray();
             }
+        }
+
+        void tagsComboBox_SelectionChanged(System.Object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
+        {
+            List<object> c = (List<object>)e.Value;
+            List<Tags> afterCast = c.Cast<Tags>().ToList();
+            ((AdminCreatePlaceViewModel)(this.BindingContext)).selectedTags = afterCast;
         }
     }
 }

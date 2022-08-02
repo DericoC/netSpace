@@ -21,7 +21,7 @@ namespace NetSpace.ViewModel
 
         public LoginViewModel()
         {
-            loginBtnText = "Log In";
+            loginBtnText = "LOG IN";
             p = new User();
             loginCommand = new Command(async () => await loginAsync());
             createAccountCommand = new Command(async () => await goToCreateAccountAsync());
@@ -31,7 +31,7 @@ namespace NetSpace.ViewModel
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                loginBtnText = "Cargando...";
+                loginBtnText = "CARGANDO...";
             });
             await Task.Delay(100);
             ses = UserSession.getSession();
@@ -44,11 +44,15 @@ namespace NetSpace.ViewModel
                     if (ses.getUser().role == "Cliente")
                     {
                         NavigationPage home = new NavigationPage(new HomeView());
+                        home.BackgroundColor = Color.White;
+                        home.BarBackground = Color.White;
                         home.BarTextColor = Color.Black;
                         Application.Current.MainPage = home;
                     } else if (ses.getUser().role == "Administrador")
                     {
                         NavigationPage adminHome = new NavigationPage(new AdminTabbedView());
+                        adminHome.BarBackground = Color.White;
+                        adminHome.BackgroundColor = Color.White;
                         adminHome.BarTextColor = Color.Black;
                         Application.Current.MainPage = adminHome;
                     } else if (ses.getUser().role == "Manager")

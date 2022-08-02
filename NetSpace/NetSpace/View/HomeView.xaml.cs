@@ -18,6 +18,11 @@ namespace NetSpace.View
 			base.OnAppearing();
 			BindingContext = new HomeViewModel();
 		}
-	}
+
+        void txtSearch_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+			((HomeViewModel)(this.BindingContext)).isSearching(txtSearch.Text);
+		}
+    }
 }
 

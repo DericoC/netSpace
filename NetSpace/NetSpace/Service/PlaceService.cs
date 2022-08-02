@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MySqlConnector;
@@ -115,6 +116,7 @@ namespace NetSpace.Service
             List<Place> places = new List<Place>();
             UserService userService = new UserService();
             BusinessService businessService = new BusinessService();
+            TagsPlacesService tagsPlacesService = new TagsPlacesService();
             PolicyService policyService = new PolicyService();
 
             try
@@ -141,7 +143,8 @@ namespace NetSpace.Service
                         place.rating = rdr.GetInt32("rating");
                         place.manager = userService.findById(rdr.GetInt32("manager"));
                         place.policy = policyService.findById(rdr.GetInt32("policy"));
-
+                        place.tags = tagsPlacesService.readTagsPlaces(place.place_id);
+                        place.tagsString = tagsToCommaSeparated(place.tags);
                         places.Add(place);
                     }
                 }
@@ -165,6 +168,7 @@ namespace NetSpace.Service
             UserService userService = new UserService();
             BusinessService businessService = new BusinessService();
             PolicyService policyService = new PolicyService();
+            TagsPlacesService tagsPlacesService = new TagsPlacesService();
 
             try
             {
@@ -191,7 +195,8 @@ namespace NetSpace.Service
                         place.rating = rdr.GetInt32("rating");
                         place.manager = userService.findById(rdr.GetInt32("manager"));
                         place.policy = policyService.findById(rdr.GetInt32("policy"));
-
+                        place.tags = tagsPlacesService.readTagsPlaces(place.place_id);
+                        place.tagsString = tagsToCommaSeparated(place.tags);
                         places.Add(place);
                     }
                 }
@@ -213,6 +218,7 @@ namespace NetSpace.Service
             BusinessService businessService = new BusinessService();
             UserService userService = new UserService();
             PolicyService policyService = new PolicyService();
+            TagsPlacesService tagsPlacesService = new TagsPlacesService();
             Place place = new Place();
             MySqlCommand cmd;
 
@@ -238,6 +244,8 @@ namespace NetSpace.Service
                         place.rating = rdr.GetInt32("rating");
                         place.manager = userService.findById(rdr.GetInt32("manager"));
                         place.policy = policyService.findById(rdr.GetInt32("policy"));
+                        place.tags = tagsPlacesService.readTagsPlaces(place.place_id);
+                        place.tagsString = tagsToCommaSeparated(place.tags);
                     }
                 }               
             }
@@ -295,6 +303,7 @@ namespace NetSpace.Service
             BusinessService businessService = new BusinessService();
             UserService userService = new UserService();
             PolicyService policyService = new PolicyService();
+            TagsPlacesService tagsPlacesService = new TagsPlacesService();
 
             try
             {
@@ -321,7 +330,8 @@ namespace NetSpace.Service
                         place.rating = rdr.GetInt32("rating");
                         place.manager = userService.findById(rdr.GetInt32("manager"));
                         place.policy = policyService.findById(rdr.GetInt32("policy"));
-
+                        place.tags = tagsPlacesService.readTagsPlaces(place.place_id);
+                        place.tagsString = tagsToCommaSeparated(place.tags);
                         places.Add(place);
                     }
                 }
@@ -365,6 +375,30 @@ namespace NetSpace.Service
             }
 
             return serverResponse;
+        }
+
+        private string tagsToCommaSeparated(List<Tags> tags)
+        {
+            string tagsOnString = "";
+
+            if (tags.Count != 0)
+            {
+                Tags lastTag = tags.Last();
+
+                foreach (var item in tags)
+                {
+                    if (item != lastTag)
+                    {
+                        tagsOnString = tagsOnString + item.name + ", ";
+                    }
+                    else
+                    {
+                        tagsOnString = tagsOnString + item.name;
+                    }
+                }
+            }
+
+            return tagsOnString;
         }
     }
 }

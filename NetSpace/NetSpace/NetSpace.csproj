@@ -11,20 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" />
     <PackageReference Include="MySqlConnector" Version="2.1.11" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="20.2.0.39" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="20.2.0.39" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="20.2.0.39" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="20.2.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="20.2.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="20.2.0.40" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="20.2.0.39" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="20.2.0.39" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="20.2.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="20.2.0.40" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
-    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="20.2.0.39" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="20.2.0.40" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="20.2.0.40" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Model\" />
@@ -47,12 +48,15 @@
     <None Remove="MvvmLight" />
     <None Remove="Syncfusion.Xamarin.SfBusyIndicator" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Syncfusion.Xamarin.SfComboBox" />
+    <None Remove="Util\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Util\" />
     <Folder Include="Service\" />
     <Folder Include="Util\Fonts\" />
+    <Folder Include="Util\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="View\AdminReservationDetailView.xaml.cs">

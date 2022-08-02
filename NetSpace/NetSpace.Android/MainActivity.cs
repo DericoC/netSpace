@@ -18,6 +18,8 @@ namespace NetSpace.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Window.SetStatusBarColor(Android.Graphics.Color.Argb(0, 51, 51, 51));
+            Window.SetTitleColor(Android.Graphics.Color.Argb(0, 0, 0, 0));
             Instance = this;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

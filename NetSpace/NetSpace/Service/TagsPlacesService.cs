@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MySqlConnector;
 using NetSpace.Model;
 using NetSpace.Util;
@@ -13,8 +14,14 @@ namespace NetSpace.Service
         private readonly string DELETE = "DELETE FROM tags_places WHERE (place_id = @place_id) and (id_tag = @id_tag);";
         private readonly string READ = "SELECT * FROM tags;";
         private readonly string FINDBYPLACE = "SELECT id_tag FROM tags_places WHERE place_id = @place_id;";
+        private readonly string FINDALLTAGSOFPLACE = "SELECT t.* FROM places p, tags t, tags_places tp WHERE p.place_id = tp.place_id AND t.tag_id = tp.id_tag AND p.place_id = @place_id;";
 
         public bool insert(TagsPlaces item)
+        {
+            return false;
+        }
+
+        public async Task<bool> insert(TagsPlaces item, bool async)
         {
             bool success = false;
             MySqlCommand cmd;
@@ -24,7 +31,7 @@ namespace NetSpace.Service
                 cmd = new MySqlCommand(INSERT, this.getConnection());
                 cmd.Parameters.AddWithValue("@place_id", item.place.place_id);
                 cmd.Parameters.AddWithValue("@id_tag", item.tag.tag_id);
-                cmd.ExecuteNonQuery();
+                await cmd.ExecuteNonQueryAsync();
                 success = true;
             }
             catch (Exception ex)
@@ -159,6 +166,42 @@ namespace NetSpace.Service
             }
 
             return oldTag;
+        }
+
+        public List<Tags> readTagsPlaces(int place_id)
+        {
+            MySqlCommand cmd;
+            List<Tags> tagsPlaces = new List<Tags>();
+
+            try
+            {
+                cmd = new MySqlCommand(FINDALLTAGSOFPLACE, this.getConnection());
+                cmd.Parameters.AddWithValue("@place_id", place_id);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.HasRows)
+                    {
+                        Tags tag = new Tags();
+
+                        tag.tag_id = rdr.GetInt32("tag_id");
+                        tag.name = rdr.GetString("name");
+                        tag.value = rdr.GetString("value");
+                        tagsPlaces.Add(tag);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+
+            return tagsPlaces;
         }
     }
 }

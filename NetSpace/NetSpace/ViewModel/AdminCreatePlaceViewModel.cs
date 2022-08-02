@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using NetSpace.Model;
 using NetSpace.Service;
@@ -7,7 +9,7 @@ using Xamarin.Forms;
 
 namespace NetSpace.ViewModel
 {
-    public class AdminCreatePlaceViewModel
+    public class AdminCreatePlaceViewModel : BaseViewModel
     {
         public Place place { get; set; }
         public Command createPlace;
@@ -16,7 +18,7 @@ namespace NetSpace.ViewModel
         public ObservableCollection<User> managers { get; set; }
         public ObservableCollection<Policy> policies { get; set; }
         public ObservableCollection<Tags> tags { get; set; }
-        public Tags selectedTag { get; set; }
+        public List<Tags> selectedTags { get; set; }
         private readonly SnackBarAlert alert = new SnackBarAlert();
         private UserSession ses = UserSession.getSession();
         private UserService userService = new UserService();
@@ -25,10 +27,12 @@ namespace NetSpace.ViewModel
         private TagsService tagsService = new TagsService();
         private TagsPlacesService tpService = new TagsPlacesService();
         public bool isCreate { get; set; }
+        public bool isBusy { get; set; }
 
         public AdminCreatePlaceViewModel(Place p)
         {
-            selectedTag = new Tags();
+            isBusy = false;
+            selectedTags = new List<Tags>();
             managers = new ObservableCollection<User>();
             foreach (var item in userService.businessManagers(ses.getUser().provider))
             {
@@ -51,6 +55,11 @@ namespace NetSpace.ViewModel
         }
         private async Task addPlace()
         {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                isBusy = true;
+            });
+            await Task.Delay(100);
             TagsPlaces tagPlaces = new TagsPlaces();
             tagPlaces.place = new Place();
             tagPlaces.tag = new Tags();
@@ -64,15 +73,14 @@ namespace NetSpace.ViewModel
                     if (placeService.insert(place))
                     {
                         tagPlaces.place.place_id = placeService.findByNameAndDescription(place.place_name, place.description);
-                        tagPlaces.tag.tag_id = selectedTag.tag_id;
-                        if (tpService.insert(tagPlaces))
+                        foreach (var item in selectedTags)
                         {
-                            Application.Current.MainPage.Navigation.PopAsync();
-                            await alert.displaySnackBarAlertAsync("Lugar creado.", 5, SnackBarAlert.INFORMATION);
-                        } else
-                        {
-                            await alert.displaySnackBarAlertAsync("Ha ocurrido un error.", 5, SnackBarAlert.ERROR);
+                            tagPlaces.tag.tag_id = item.tag_id;
+                            await tpService.insert(tagPlaces, true);
                         }
+
+                        Application.Current.MainPage.Navigation.PopAsync();
+                        await alert.displaySnackBarAlertAsync("Lugar creado.", 5, SnackBarAlert.INFORMATION);
                     }
                     else
                     {
@@ -86,6 +94,10 @@ namespace NetSpace.ViewModel
             {
                 await alert.displaySnackBarAlertAsync("Debe seleccionar un administrador.", 5, SnackBarAlert.ERROR);
             }
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                isBusy = false;
+            });
         }
         private async Task updatePlace()
         {
@@ -96,20 +108,29 @@ namespace NetSpace.ViewModel
             if (placeService.update(place))
             {
                 tagPlaces.tag.tag_id = tpService.findByPlaceId(place.place_id);
-                tagPlaces.place.place_id = place.place_id;
-                if (tpService.update(tagPlaces, selectedTag.tag_id))
+                foreach (var item in selectedTags)
                 {
-                    Application.Current.MainPage.Navigation.PopAsync();
-                    await alert.displaySnackBarAlertAsync("Lugar actualizado.", 5, SnackBarAlert.INFORMATION);
-                } else
-                {
-                    await alert.displaySnackBarAlertAsync("Ha ocurrido un error.", 5, SnackBarAlert.ERROR);
+                    tagPlaces.place.place_id = place.place_id;
+                    if (tpService.update(tagPlaces, item.tag_id))
+                    {
+                        Application.Current.MainPage.Navigation.PopAsync();
+                        await alert.displaySnackBarAlertAsync("Lugar actualizado.", 5, SnackBarAlert.INFORMATION);
+                    }
+                    else
+                    {
+                        await alert.displaySnackBarAlertAsync("Ha ocurrido un error.", 5, SnackBarAlert.ERROR);
+                    }
                 }
             }
             else
             {
                 await alert.displaySnackBarAlertAsync("Ha ocurrido un error.", 5, SnackBarAlert.ERROR);
             }
+        }
+
+        public void comboBoxChange(Tags tag)
+        {
+            selectedTags.Add(tag);
         }
 
         public Command CreatePlace

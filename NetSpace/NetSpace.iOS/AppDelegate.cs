@@ -30,6 +30,7 @@ namespace NetSpace.iOS
             SfCalendarRenderer.Init();
             LoadApplication(new App());
             new SfBusyIndicatorRenderer();
+            Syncfusion.XForms.iOS.ComboBox.SfComboBoxRenderer.Init();
             Syncfusion.XForms.iOS.Border.SfBorderRenderer.Init();
             Syncfusion.XForms.iOS.Buttons.SfButtonRenderer.Init();
             Syncfusion.XForms.iOS.PopupLayout.SfPopupLayoutRenderer.Init();
