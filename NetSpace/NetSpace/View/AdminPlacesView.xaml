@@ -7,10 +7,11 @@
     x:DataType="viewmodel:AdminPlacesViewModel"
     x:Class="NetSpace.View.AdminPlacesView"
     x:Name="PlaceView"
+    BackgroundColor="#F8F7F9"
     NavigationPage.IconColor="Black">
 
     <NavigationPage.TitleView>
-        <Label Text="Espacios" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24"/>
+        <Label Text="Espacios" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24" TextColor="Black"/>
     </NavigationPage.TitleView>
 
     <ContentPage.ToolbarItems>

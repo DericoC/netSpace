@@ -5,10 +5,12 @@
     xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:viewmodel="clr-namespace:NetSpace.ViewModel" xmlns:model="clr-namespace:NetSpace.Model"
     x:DataType="viewmodel:AdminAccountsViewModel"
-    x:Class="NetSpace.View.AdminAccountsView">
+    x:Class="NetSpace.View.AdminAccountsView"
+    BackgroundColor="#F8F7F9"
+    NavigationPage.IconColor="Black">
 
     <NavigationPage.TitleView>
-        <Label Text="Cuentas" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24"/>
+        <Label Text="Cuentas" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Font="Bold,24" TextColor="Black"/>
     </NavigationPage.TitleView>
 
     <ContentPage.ToolbarItems>
@@ -17,7 +19,7 @@
                 <FontImageSource
                     FontFamily="FASolid"
                     Glyph="&#xf08b;"
-                    Size="21"/>
+                    Size="21" Color="Black"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem Command="{Binding AddAccountCommand}">
@@ -25,7 +27,7 @@
                 <FontImageSource
                     FontFamily="FASolid"
                     Glyph="&#x2b;"
-                    Size="25"/>
+                    Size="25" Color="Black"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
