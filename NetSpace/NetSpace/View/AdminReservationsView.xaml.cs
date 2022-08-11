@@ -10,6 +10,12 @@ namespace NetSpace.View
             InitializeComponent();
             BindingContext = new AdminReservationViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            ((AdminReservationViewModel)this.BindingContext).init();
+            base.OnAppearing();
+        }
     }
 }
 

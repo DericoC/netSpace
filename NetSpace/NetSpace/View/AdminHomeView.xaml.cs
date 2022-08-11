@@ -12,6 +12,12 @@ namespace NetSpace.View
             InitializeComponent();
             BindingContext = new AdminHomeViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            ((AdminHomeViewModel)this.BindingContext).init();
+            base.OnAppearing();
+        }
     }
 }
 

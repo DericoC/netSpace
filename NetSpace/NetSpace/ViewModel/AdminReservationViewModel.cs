@@ -23,13 +23,18 @@ namespace NetSpace.ViewModel
         public AdminReservationViewModel()
         {
             reservation = new ObservableCollection<Reservation>();
+            reservationDetailCommand = new Command<Reservation>(async (r) => await loadSelectedReservationAsync(r));
+            this.init();
+        }
+
+        public void init()
+        {
+            reservation.Clear();
             foreach (var item in reservationService.readSpecific(ses.getUser().provider))
             {
                 reservation.Add(item);
             }
-            reservationDetailCommand = new Command<Reservation>(async (r) => await loadSelectedReservationAsync(r));
         }
-
 
         async Task loadSelectedReservationAsync(Reservation r)
         {

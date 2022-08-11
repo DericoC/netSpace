@@ -27,7 +27,7 @@ namespace NetSpace.ViewModel
 
         private async Task addPolicy()
         {
-            policy.business_id = ses.getUser().provider;
+            policy.policy_business_id = ses.getUser().provider;
             if (policyService.insert(policy))
             {
                 Application.Current.MainPage.Navigation.PopAsync();
@@ -41,7 +41,7 @@ namespace NetSpace.ViewModel
 
         private async Task updatePolicy()
         {
-            policy.business_id = ses.getUser().provider;
+            policy.policy_business_id = ses.getUser().provider;
             if (policyService.update(policy))
             {
                 Application.Current.MainPage.Navigation.PopAsync();

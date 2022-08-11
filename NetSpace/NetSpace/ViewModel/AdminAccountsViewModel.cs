@@ -24,7 +24,11 @@ namespace NetSpace.ViewModel
             addAccountCommand = new Command(async () => await goToCreateAccount());
             modifyAccountCommand = new Command<User>(async (u) => await goToModifyAccount(u));
             logoutCommand = new Command(async () => await logoutAsync());
+            this.init();
+        }
 
+        public void init()
+        {
             users = new ObservableCollection<User>();
             foreach (var item in userService.readSpecific(ses.getUser().provider))
             {
@@ -37,7 +41,7 @@ namespace NetSpace.ViewModel
             await Application.Current.MainPage.Navigation.PushAsync(new AdminCreateAccountView(null));
         }
 
-        private async Task goToModifyAccount(User account)
+        public async Task goToModifyAccount(User account)
         {
             await Application.Current.MainPage.Navigation.PushAsync(new AdminCreateAccountView(account));
         }

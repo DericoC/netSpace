@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
 using MySqlConnector;
 using NetSpace.Model;
 using NetSpace.Util;
@@ -27,7 +26,7 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(INSERT, this.getConnection());
-                cmd.Parameters.AddWithValue("@frequency", item.frequency);
+                cmd.Parameters.AddWithValue("@frequency", item.frequency.general_parameter_id);
                 cmd.Parameters.AddWithValue("@start_time", item.start_time);
                 cmd.Parameters.AddWithValue("@end_time", item.end_time);
                 cmd.Parameters.AddWithValue("@place_id", item.place.place_id);
@@ -53,7 +52,7 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(UPDATE, this.getConnection());
-                cmd.Parameters.AddWithValue("@frequency", item.frequency);
+                cmd.Parameters.AddWithValue("@frequency", item.frequency.general_parameter_id);
                 cmd.Parameters.AddWithValue("@start_time", item.start_time);
                 cmd.Parameters.AddWithValue("@end_time", item.end_time);
                 cmd.Parameters.AddWithValue("@place_id", item.place.place_id);

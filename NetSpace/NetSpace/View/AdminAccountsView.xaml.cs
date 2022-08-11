@@ -21,6 +21,12 @@ namespace NetSpace.View
             BindingContext = new AdminAccountsViewModel();
         }
 
+        protected override void OnAppearing()
+        {
+            ((AdminAccountsViewModel)this.BindingContext).init();
+            base.OnAppearing();
+        }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
@@ -61,14 +67,14 @@ namespace NetSpace.View
             }
         }
 
-        private void Update()
+        private async void Update()
         {
             if (itemIndex >= 0)
             {
                 List<User> lista = new List<User>(((AdminAccountsViewModel)(this.BindingContext)).users);
                 if (lista[itemIndex].role != "Cliente")
                 {
-                    Navigation.PushAsync(new AdminCreateAccountView(lista[itemIndex]));
+                    await ((AdminAccountsViewModel)(this.BindingContext)).goToModifyAccount(lista[itemIndex]);
                     this.usersList.ResetSwipe();
                 } else
                 {

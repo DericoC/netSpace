@@ -21,6 +21,12 @@ namespace NetSpace.ViewModel
         {
             createPolicy = new Command(async () => await goToCreatePolicy());
             policies = new ObservableCollection<Policy>();
+            this.init();
+        }
+
+        public void init()
+        {
+            policies.Clear();
             foreach (var item in policyService.businessPolicies(ses.getUser().provider))
             {
                 policies.Add(item);

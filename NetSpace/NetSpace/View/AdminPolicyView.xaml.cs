@@ -19,6 +19,12 @@ namespace NetSpace.View
             BindingContext = new AdminPolicyViewModel();
         }
 
+        protected override void OnAppearing()
+        {
+            ((AdminPolicyViewModel)this.BindingContext).init();
+            base.OnAppearing();
+        }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

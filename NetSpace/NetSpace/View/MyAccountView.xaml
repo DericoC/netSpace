@@ -48,7 +48,7 @@
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding user.first_name.Length}" 
                                  Value="0">
-                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="ErrorText" Value="Nombre requerido"/>
                             <Setter Property="HasError" Value="True"/>
                         </DataTrigger>
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -67,7 +67,7 @@
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding user.last_name.Length}" 
                                  Value="0">
-                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="ErrorText" Value="Apellido requerido"/>
                             <Setter Property="HasError" Value="True"/>
                         </DataTrigger>
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -103,7 +103,7 @@
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding user.mail.Length}" 
                                  Value="0">
-                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="ErrorText" Value="Correo requerido"/>
                             <Setter Property="HasError" Value="True"/>
                         </DataTrigger>
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -122,7 +122,7 @@
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding user.address.Length}" 
                                  Value="0">
-                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="ErrorText" Value="Dirección requerida"/>
                             <Setter Property="HasError" Value="True"/>
                         </DataTrigger>
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -142,7 +142,7 @@
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding user.password.Length}" 
                                  Value="0">
-                            <Setter Property="ErrorText" Value="Password required"/>
+                            <Setter Property="ErrorText" Value="Contraseña requerida"/>
                             <Setter Property="HasError" Value="True"/>
                         </DataTrigger>
                         <DataTrigger TargetType="inputLayout:SfTextInputLayout" 

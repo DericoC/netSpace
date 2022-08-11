@@ -18,7 +18,7 @@ namespace NetSpace.Service
         private readonly string DELETE = "DELETE FROM users WHERE (user_id = @id);";
         private readonly string READ = "SELECT * FROM users;";
         private readonly string READSPECIFIC = "SELECT * FROM users WHERE provider = @provider;";
-        private readonly string BUSINESSMANAGER = "SELECT * FROM users WHERE role = 'Manager' AND provider = @business_id;";
+        private readonly string BUSINESSMANAGER = "SELECT * FROM users WHERE role = 'Encargado' AND provider = @business_id;";
         private readonly string FINDBYID = "SELECT * FROM users WHERE user_id = @id;";
         private readonly string LOGIN = "SELECT * FROM users WHERE mail = @mail AND password = @password;";
 

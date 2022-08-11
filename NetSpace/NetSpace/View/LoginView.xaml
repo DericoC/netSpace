@@ -30,14 +30,14 @@
             </Grid.RowDefinitions>
             <Image Source="logo.png" HeightRequest="140"/>
             <inputLayout:SfTextInputLayout Grid.Row="1"
-                Hint="Email" FocusedColor="#333333"
+                Hint="Correo" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                 <inputLayout:SfTextInputLayout.Triggers>
                     <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding p.mail.Length}" 
                                  Value="0">
-                        <Setter Property="ErrorText" Value="Email required"/>
+                        <Setter Property="ErrorText" Value="Correo requerido"/>
                         <Setter Property="HasError" Value="True"/>
                     </DataTrigger>
                     <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -56,7 +56,7 @@
                     <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding p.password.Length}" 
                                  Value="0">
-                        <Setter Property="ErrorText" Value="Password required"/>
+                        <Setter Property="ErrorText" Value="Contraseña requerida"/>
                         <Setter Property="HasError" Value="True"/>
                     </DataTrigger>
                     <DataTrigger TargetType="inputLayout:SfTextInputLayout" 

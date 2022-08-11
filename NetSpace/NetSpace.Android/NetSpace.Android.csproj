@@ -62,19 +62,19 @@
       <Version>2.1.11</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>20.2.0.40</Version>
+      <Version>20.2.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>20.2.0.40</Version>
+      <Version>20.2.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
-      <Version>20.2.0.40</Version>
+      <Version>20.2.0.43</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
       <Version>2.0.4</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
-      <Version>20.2.0.40</Version>
+      <Version>20.2.0.43</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net.Mobile">
       <Version>2.4.1</Version>
@@ -83,7 +83,7 @@
       <Version>2.4.1</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator">
-      <Version>20.2.0.40</Version>
+      <Version>20.2.0.43</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>

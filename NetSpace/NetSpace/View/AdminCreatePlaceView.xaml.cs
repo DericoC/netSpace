@@ -22,6 +22,14 @@ namespace NetSpace.View
             InitializeComponent();
             place = p;
             BindingContext = new AdminCreatePlaceViewModel(p);
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                tagsComboBox.HeightRequest = 20;
+            }
+            else
+            {
+                tagsComboBox.HeightRequest = 51;
+            }
         }
 
         async void OnPickPhotoButtonClicked(object sender, EventArgs e)

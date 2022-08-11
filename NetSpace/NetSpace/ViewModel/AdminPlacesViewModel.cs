@@ -22,8 +22,13 @@ namespace NetSpace.ViewModel
         {
             createPlace = new Command(async () => await goToCreatePlace());
             createPolicy = new Command(async () => await goToPoliciesList());
-
             places = new ObservableCollection<Place>();
+            this.init();
+        }
+
+        public void init()
+        {
+            places.Clear();
             foreach (var item in placeService.readSpecificBusiness(ses.getUser().provider))
             {
                 places.Add(item);
@@ -33,6 +38,11 @@ namespace NetSpace.ViewModel
         private async Task goToCreatePlace()
         {
             await Application.Current.MainPage.Navigation.PushAsync(new AdminCreatePlaceView(null));
+        }
+
+        public async Task goToUpdatePlace(Place p)
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new AdminCreatePlaceView(p));
         }
 
         private async Task goToPoliciesList()

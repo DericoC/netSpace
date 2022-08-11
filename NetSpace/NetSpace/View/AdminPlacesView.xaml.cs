@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using NetSpace.Model;
 using NetSpace.ViewModel;
 using Syncfusion.ListView.XForms;
@@ -17,6 +18,12 @@ namespace NetSpace.View
         {
             InitializeComponent();
             BindingContext = new AdminPlacesViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            ((AdminPlacesViewModel)this.BindingContext).init();
+            base.OnAppearing();
         }
 
         protected override void OnDisappearing()
@@ -59,12 +66,12 @@ namespace NetSpace.View
             }
         }
 
-        private void Update()
+        private async void Update()
         {
             if (itemIndex >= 0)
             {
                 List<Place> lista = new List<Place>(((AdminPlacesViewModel)(this.BindingContext)).places);
-                Navigation.PushAsync(new AdminCreatePlaceView(lista[itemIndex]));
+                await ((AdminPlacesViewModel)(this.BindingContext)).goToUpdatePlace(lista[itemIndex]);
                 this.placeList.ResetSwipe();
             }                
         }

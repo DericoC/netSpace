@@ -17,6 +17,7 @@ namespace NetSpace.ViewModel
         private Command reservationDetailCommand;
         public bool eventsEmpty { get; set; }
         public bool placesEmpty { get; set; }
+        private int businessID { get; set; }
         PlaceService placeService = new PlaceService();
         ReservationService reservationService = new ReservationService();
         UserSession user = UserSession.getSession();
@@ -25,17 +26,24 @@ namespace NetSpace.ViewModel
         {
             eventsEmpty = true;
             placesEmpty = true;
-            int business_id = user.getUser().provider;
-            reservations = new ObservableCollection<Reservation>();
-            places = new ObservableCollection<Place>();
+            businessID = user.getUser().provider;
             placeDetailCommand = new Command(async (p) => await loadSelectedPlaceAsync(p));
             reservationDetailCommand = new Command(async (r) => await loadSelectedReservationAsync(r));
-            foreach (var item in reservationService.nearestReservations(business_id))
+            places = new ObservableCollection<Place>();
+            reservations = new ObservableCollection<Reservation>();
+            this.init();
+        }
+
+        public void init()
+        {
+            reservations.Clear();
+            places.Clear();
+            foreach (var item in reservationService.nearestReservations(businessID))
             {
                 eventsEmpty = false;
                 reservations.Add(item);
             }
-            foreach (var item in placeService.topPlaces(business_id))
+            foreach (var item in placeService.topPlaces(businessID))
             {
                 placesEmpty = false;
                 places.Add(item);

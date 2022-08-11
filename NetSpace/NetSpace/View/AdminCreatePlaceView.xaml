@@ -40,15 +40,19 @@
                 </AbsoluteLayout>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.2*"/>
                     </Grid.RowDefinitions>
                     <inputLayout:SfTextInputLayout Grid.Row="0"
                 Hint="Nombre"
@@ -76,7 +80,7 @@
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding place.description.Length}" 
                                  Value="0">
-                                <Setter Property="ErrorText" Value="Apellido requerido"/>
+                                <Setter Property="ErrorText" Value="Descirpción requerida"/>
                                 <Setter Property="HasError" Value="True"/>
                             </DataTrigger>
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -94,7 +98,7 @@
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding place.dimensions.Length}" 
                                  Value="0">
-                                <Setter Property="ErrorText" Value="Apellido requerido"/>
+                                <Setter Property="ErrorText" Value="Dimensiones requeridas"/>
                                 <Setter Property="HasError" Value="True"/>
                             </DataTrigger>
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -112,7 +116,7 @@
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding place.capacity}" 
                                  Value="0">
-                                <Setter Property="ErrorText" Value="Correo requerido"/>
+                                <Setter Property="ErrorText" Value="Capacidad requerida"/>
                                 <Setter Property="HasError" Value="True"/>
                             </DataTrigger>
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -130,7 +134,7 @@
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
                                  Binding="{Binding place.amenities.Length}" 
                                  Value="0">
-                                <Setter Property="ErrorText" Value="Telefono requerido"/>
+                                <Setter Property="ErrorText" Value="Amenidades requeridas"/>
                                 <Setter Property="HasError" Value="True"/>
                             </DataTrigger>
                             <DataTrigger TargetType="inputLayout:SfTextInputLayout" 
@@ -142,7 +146,7 @@
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="5"
                 TrailingViewPosition="Inside"
-                Hint="Administrador"
+                Hint="Encargado"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <Picker SelectedItem="{Binding place.manager, Mode=TwoWay}"
@@ -163,11 +167,11 @@
                         </inputLayout:SfTextInputLayout.TrailingView>
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="7"
-                TrailingViewPosition="Inside"
-                Hint="Tags"
-                ContainerType="Outlined"
-                OutlineCornerRadius="8">
-                        <combobox:SfComboBox x:Name="tagsComboBox" HeightRequest="25" DropDownItemHeight="50" DisplayMemberPath="name"
+                            TrailingViewPosition="Inside"
+                            Hint="Tags"
+                            ContainerType="Outlined"
+                            OutlineCornerRadius="8">
+                        <combobox:SfComboBox x:Name="tagsComboBox" DropDownItemHeight="50" DisplayMemberPath="name"
                               MultiSelectMode="Token" DataSource="{Binding tags, Mode=TwoWay}" SelectionChanged="tagsComboBox_SelectionChanged">
                             <combobox:SfComboBox.TokenSettings>
                                 <combobox:TokenSettings FontSize="14" BackgroundColor="#9C9C9C" 
@@ -178,15 +182,43 @@
                             </combobox:SfComboBox.TokenSettings>
                         </combobox:SfComboBox>
                     </inputLayout:SfTextInputLayout>
-                    <StackLayout Grid.Row="8" RadioButtonGroup.SelectedValue="{Binding place.restrooms}" RadioButtonGroup.GroupName="Restrooms">
+
+                    <inputLayout:SfTextInputLayout Grid.Row="8"
+                            TrailingViewPosition="Inside"
+                            Hint="Hora Inicio"
+                            ContainerType="Outlined"
+                            OutlineCornerRadius="8">
+                        <TimePicker Time="{Binding startPicker}" />
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Grid.Row="9"
+                            TrailingViewPosition="Inside"
+                            Hint="Hora Final"
+                            ContainerType="Outlined"
+                            OutlineCornerRadius="8">
+                        <TimePicker Time="{Binding endPicker}" />
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Grid.Row="10"
+                                TrailingViewPosition="Inside"
+                                Hint="Frecuencia"
+                                ContainerType="Outlined"
+                                OutlineCornerRadius="8">
+                        <Picker SelectedItem="{Binding config.frequency, Mode=TwoWay}"
+                            ItemsSource="{Binding frequency}" ItemDisplayBinding="{Binding value}"/>
+                        <inputLayout:SfTextInputLayout.TrailingView>
+                            <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
+                        </inputLayout:SfTextInputLayout.TrailingView>
+                    </inputLayout:SfTextInputLayout>
+                    <StackLayout Grid.Row="11" RadioButtonGroup.SelectedValue="{Binding place.restrooms}" RadioButtonGroup.GroupName="Restrooms">
                         <Label Text="¿Tiene baños?" />
                         <RadioButton Content="Sí" BackgroundColor="Transparent" Value="True"/>
                         <RadioButton Content="No" BackgroundColor="Transparent" Value="False"/>
                     </StackLayout>
                     <buttons:SfButton Text="Crear Lugar" CornerRadius="25" Padding="15"
-                                  FontAttributes="Bold" Margin="0,10" Grid.Row="9" Command="{Binding CreatePlace}" IsVisible="{Binding isCreate}"/>
+                                  FontAttributes="Bold" Margin="0,10" Grid.Row="12" Command="{Binding CreatePlace}" IsVisible="{Binding isCreate}"/>
                     <buttons:SfButton Text="Guardar Lugar" CornerRadius="25" Padding="15"
-                                  FontAttributes="Bold" Margin="0,10" Grid.Row="9" Command="{Binding SavePlace}" IsVisible="{Binding isCreate, Converter={StaticResource InvertedBoolConverter}}"/>
+                                  FontAttributes="Bold" Margin="0,10" Grid.Row="12" Command="{Binding SavePlace}" IsVisible="{Binding isCreate, Converter={StaticResource InvertedBoolConverter}}"/>
                 </Grid>
             </StackLayout>
             <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"

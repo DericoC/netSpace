@@ -200,7 +200,7 @@
                             <Picker.Items>
                                 <x:String>Cliente</x:String>
                                 <x:String>Administrador</x:String>
-                                <x:String>Gerente</x:String>
+                                <x:String>Encargado</x:String>
                             </Picker.Items>
                         </Picker>
                     </inputLayout:SfTextInputLayout>
