@@ -15,6 +15,7 @@ namespace NetSpace.Service
         private readonly string FINDBYGENERALPARAM = "SELECT * FROM general_parameters WHERE general_param_name = @param_name;";
         private readonly string FINDBYID = "SELECT * FROM general_parameters WHERE general_parameter_id = @id;";
         private readonly string FINDSLOTS = "SELECT * FROM general_parameters WHERE general_param_name LIKE '%min freq%';";
+        private readonly string BUSINESSTYPES = "SELECT * FROM general_parameters WHERE description = 'Business Type';";
 
         public bool insert(GeneralParameters item)
         {
@@ -214,6 +215,41 @@ namespace NetSpace.Service
                         parameters.general_param_name = rdr.GetString("general_param_name");
                         parameters.description = rdr.GetString("description");
                         parameters.value = rdr.GetString("value");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            finally
+            {
+                this.disconnect();
+            }
+
+            return parameters;
+        }
+
+        public List<GeneralParameters> businessTypes()
+        {
+            List<GeneralParameters> parameters = new List<GeneralParameters>();
+            MySqlCommand cmd;
+
+            try
+            {
+                cmd = new MySqlCommand(BUSINESSTYPES, this.getConnection());
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    if (rdr.HasRows)
+                    {
+                        GeneralParameters gp = new GeneralParameters();
+                        gp.general_parameter_id = rdr.GetInt32("general_parameter_id");
+                        gp.general_param_name = rdr.GetString("general_param_name");
+                        gp.description = rdr.GetString("description");
+                        gp.value = rdr.GetString("value");
+                        parameters.Add(gp);
                     }
                 }
             }

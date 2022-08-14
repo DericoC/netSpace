@@ -15,6 +15,7 @@ namespace NetSpace.ViewModel
         private UserService service = new UserService();
         public Command loginCommand;
         public Command createAccountCommand;
+        public Command createBusinessCommand;
         public string mailErrorMsg { get; set; }
         public string passErrorMsg { get; set; }
         private readonly SnackBarAlert alert = new SnackBarAlert();
@@ -25,6 +26,7 @@ namespace NetSpace.ViewModel
             p = new User();
             loginCommand = new Command(async () => await loginAsync());
             createAccountCommand = new Command(async () => await goToCreateAccountAsync());
+            createBusinessCommand = new Command(async () => await goToCreateBusinessAsync());
         }
 
         async Task loginAsync()
@@ -84,6 +86,11 @@ namespace NetSpace.ViewModel
             await Application.Current.MainPage.Navigation.PushAsync(new CreateAccountView());
         }
 
+        async Task goToCreateBusinessAsync()
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new CreateBusinessView());
+        }
+
         public Command CreateAccountCommand
         {
             get => createAccountCommand;
@@ -92,6 +99,11 @@ namespace NetSpace.ViewModel
         public Command LoginCommand
         {
             get => loginCommand;
+        }
+
+        public Command CreateBusinessCommand
+        {
+            get => createBusinessCommand;
         }
     }
 }

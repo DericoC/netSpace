@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NetSpace.Model;
 using NetSpace.Service;
 using NetSpace.Util;
@@ -23,6 +24,8 @@ namespace NetSpace.View
             InitializeComponent();
             calendar.Locale = new System.Globalization.CultureInfo("ES");
             BindingContext = new CalendarViewModel(placeId);
+            box.IsVisible = false;
+            busyindicator.IsBusy = false;
             PlaceID = placeId;
             BusinessID = business_id;
         }
@@ -35,6 +38,14 @@ namespace NetSpace.View
                 bool answer = await DisplayAlert(appointment.Subject, appointment.StartTime.ToString(), "Confirmar", "Cancelar");
                 if (answer)
                 {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        box.IsVisible = true;
+                        busyindicator.IsBusy = true;
+                    });
+
+                    await Task.Delay(100);
+
                     Reservation reservation = new Reservation();
                     reservation.user = new User();
                     reservation.place = new Place();
@@ -56,6 +67,12 @@ namespace NetSpace.View
                     {
                         await alert.displaySnackBarAlertAsync("Ha ocurrido un error", 5, SnackBarAlert.ERROR);
                     }
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        box.IsVisible = false;
+                        busyindicator.IsBusy = false;
+                    });
                 }
             } else
             {

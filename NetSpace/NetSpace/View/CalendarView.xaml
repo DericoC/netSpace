@@ -2,22 +2,34 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms" xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
+    xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+    xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
     x:DataType="viewmodel:CalendarViewModel"
     x:Class="NetSpace.View.CalendarView">
 
-    <ContentPage.Content>
+    <AbsoluteLayout VerticalOptions="Fill">
         <syncfusion:SfCalendar x:Name="calendar" InlineViewMode="Agenda" AgendaViewHeight="350"
           ShowInlineEvents="True" DataSource="{Binding CalendarInlineEvents}" InlineItemTapped="Calendar_InlineItemTapped">
             <syncfusion:SfCalendar.MonthViewSettings>
                 <syncfusion:MonthViewSettings TodayBorderColor="#ec5446"
                                               TodaySelectionBackgroundColor="#ec5446"
-                                              DateSelectionColor="Black"
+                                              DateSelectionColor="#333333"
                                               SelectionRadius="13"
-                                              AgendaSelectedDateColor="Black"
+                                              AgendaSelectedDateColor="#333333"
                                               DayFontAttributes="Bold"/>
             </syncfusion:SfCalendar.MonthViewSettings>
         </syncfusion:SfCalendar>
-    </ContentPage.Content>
+
+        <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    BackgroundColor="Black" x:Name="box"
+                    Opacity="0.6"
+                    InputTransparent="false"/>
+        <busyindicator:SfBusyIndicator x:Name="busyindicator" AbsoluteLayout.LayoutFlags="PositionProportional"
+                                       AnimationType="SingleCircle" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#F9A007" ViewBoxWidth="120"
+                                       Duration="2.5"/>
+    </AbsoluteLayout>
 </ContentPage>
 

@@ -27,6 +27,7 @@
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.1*"/>
             </Grid.RowDefinitions>
             <Image Source="logo.png" HeightRequest="140"/>
             <inputLayout:SfTextInputLayout Grid.Row="1"
@@ -64,7 +65,7 @@
                         <Setter Property="HasError" Value="False"/>
                     </DataTrigger>
                 </inputLayout:SfTextInputLayout.Triggers>
-                <Entry IsPassword="True" Text="{Binding p.password}" x:Name="txtPassword" Keyboard="Plain" TextColor="Black" />
+                <Entry IsPassword="True" Text="{Binding p.password}" x:Name="txtPassword" Keyboard="Plain" TextColor="Black"/>
             </inputLayout:SfTextInputLayout>
             <buttons:SfButton Grid.Row="3" Margin="50,10" Text="{Binding loginBtnText}" CornerRadius="25" Padding="15" FontAttributes="Bold" Command="{Binding LoginCommand}" BackgroundColor="#333333" TextColor="White" />
             <StackLayout Grid.Row="4" HorizontalOptions="Center" Orientation="Horizontal">
@@ -78,7 +79,18 @@
                                      BackgroundColor="Transparent"
                                      CornerRadius="2"
                                      FontSize="18">
-
+                </buttons:SfButton>
+            </StackLayout>
+            <StackLayout Grid.Row="5" HorizontalOptions="Center" Orientation="Horizontal">
+                <buttons:SfButton   Command="{Binding CreateBusinessCommand}"
+                                     Text="¿Crear negocio?"
+                                     BorderWidth="0" Margin="0,0,0,0"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     TextColor="#333333"
+                                     BackgroundColor="Transparent"
+                                     CornerRadius="2"
+                                     FontSize="18">
                 </buttons:SfButton>
             </StackLayout>
         </Grid>

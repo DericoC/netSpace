@@ -8,6 +8,7 @@
     xmlns:viewmodel="clr-namespace:NetSpace.ViewModel"
     x:DataType="viewmodel:CreateAccountViewModel"
     BackgroundColor="#F8F7F9"
+    NavigationPage.IconColor="Black"
     x:Class="NetSpace.View.CreateAccountView">
 
     <ContentPage.Resources>
@@ -24,7 +25,7 @@
                      WidthRequest="{OnPlatform Default='-1', UWP='350'}">
             <Grid>
                 <inputLayout:SfTextInputLayout Grid.Row="0"
-                Hint="Nombre"
+                Hint="Nombre" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                     <inputLayout:SfTextInputLayout.Triggers>
@@ -43,7 +44,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="1"
-                Hint="Apellido"
+                Hint="Apellido" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                     <inputLayout:SfTextInputLayout.Triggers>
@@ -63,7 +64,7 @@
 
                 <inputLayout:SfTextInputLayout Grid.Row="2"
                 TrailingViewPosition="Inside"
-                Hint="Genero"
+                Hint="Genero" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                     <Picker SelectedItem="{Binding user.gender, Mode=TwoWay}">
@@ -79,7 +80,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="3"
-                Hint="Correo"
+                Hint="Correo" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                     <inputLayout:SfTextInputLayout.Triggers>
@@ -98,7 +99,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="4"
-                Hint="Telefono"
+                Hint="Telefono" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                     <inputLayout:SfTextInputLayout.Triggers>
@@ -117,7 +118,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="5"
-                Hint="Dirección"
+                Hint="Dirección" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                     <inputLayout:SfTextInputLayout.Triggers>
@@ -136,7 +137,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="6"
-                Hint="Contraseña"
+                Hint="Contraseña" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8"
                 EnablePasswordVisibilityToggle="True">
@@ -156,7 +157,7 @@
                 </inputLayout:SfTextInputLayout>
 
                 <inputLayout:SfTextInputLayout Grid.Row="7"
-                Hint="Confirmar Contraseña"
+                Hint="Confirmar Contraseña" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8"
                  EnablePasswordVisibilityToggle="True">
@@ -175,7 +176,7 @@
                     <Entry Text="{Binding rePassword}" x:Name="txtConfContra" IsPassword="True"/>
                 </inputLayout:SfTextInputLayout>
 
-                <buttons:SfButton Text="CREAR CUENTA" CornerRadius="25" Padding="15"
+                <buttons:SfButton Text="CREAR CUENTA" CornerRadius="25" Padding="15" BackgroundColor="#333333"
                                   FontAttributes="Bold" Margin="0,10" Grid.Row="8" Command="{Binding createAccount}"/>
             </Grid>
         </StackLayout>

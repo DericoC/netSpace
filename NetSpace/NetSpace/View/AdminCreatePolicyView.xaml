@@ -107,9 +107,9 @@
                 <Entry Text="{Binding policy.price}" x:Name="txtAmenidades"/>
             </inputLayout:SfTextInputLayout>
         </Grid>
-        <buttons:SfButton Text="Crear Politica" CornerRadius="25" Padding="15" VerticalOptions="EndAndExpand"
+        <buttons:SfButton Text="Crear Politica" CornerRadius="25" Padding="15" VerticalOptions="EndAndExpand" BackgroundColor="#333333"
                                   FontAttributes="Bold" Margin="0,10" Command="{Binding CreatePolicy}" IsVisible="{Binding isCreate}"/>
-        <buttons:SfButton Text="Guardar Politica" CornerRadius="25" Padding="15" VerticalOptions="EndAndExpand"
+        <buttons:SfButton Text="Guardar Politica" CornerRadius="25" Padding="15" VerticalOptions="EndAndExpand" BackgroundColor="#333333"
                                   FontAttributes="Bold" Margin="0,10" Command="{Binding UpdatePolicyCommand}" IsVisible="{Binding isCreate, Converter={StaticResource InvertedBoolConverter}}"/>
     </StackLayout>
 </ContentPage>

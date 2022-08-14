@@ -8,6 +8,7 @@ namespace NetSpace.Model
 		public int business_id { get; set; }
 		public string business_name { get; set; }
 		public int type { get; set; }
+		public GeneralParameters typeObject { get; set; }
 
 
 		public Business()

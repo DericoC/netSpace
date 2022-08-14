@@ -32,7 +32,7 @@
                 <Frame CornerRadius="20" BackgroundColor="White" Margin="0,-20,0,0" HasShadow="False" Padding="0,10,0,10">
                     <Label x:Name="lblName" Margin="20, 20, 20, 20" FontSize="24" FontAttributes="Bold" TextColor="black" Text="{Binding placeDetail.place_name}"/>
                 </Frame>
-                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" Color="#1690F4" Margin="20,-20,20,20"/>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" Color="#F9A007" Margin="20,-20,20,20"/>
                 <Label x:Name="lblDescription" Margin="20, 0, 20, 20" FontSize="20" TextColor="black" Text="{Binding placeDetail.description}"/>
 
                 <Label Margin="20, 0, 20, 10" TextColor="black">
@@ -98,7 +98,7 @@
                     </Label.FormattedText>
                 </Label>
                 <buttons:SfButton Margin="20,20,20,40" Text="RESERVAR" CornerRadius="25" Padding="15" FontAttributes="Bold" IsVisible="{Binding viewAsAdmin, Converter={StaticResource InvertedBoolConverter}}"
-                                  BackgroundColor="#1690F4" Command="{Binding GoToCalendar}" VerticalOptions="EndAndExpand" HorizontalOptions="Fill"/>
+                                  BackgroundColor="#333333" Command="{Binding GoToCalendar}" VerticalOptions="EndAndExpand" HorizontalOptions="Fill"/>
             </StackLayout>
                 <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
                     BackgroundColor="Black" x:Name="box" IsVisible="{Binding isBusy}"
@@ -107,7 +107,7 @@
                 <busyindicator:SfBusyIndicator x:Name="busyindicator" AbsoluteLayout.LayoutFlags="PositionProportional"
                                        AnimationType="SingleCircle" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1"
                                        BackgroundColor="Transparent" IsBusy="{Binding isBusy}"
-                                       TextColor="#1690F4" ViewBoxWidth="120"
+                                       TextColor="#F9A007" ViewBoxWidth="120"
                                        Duration="2.5"/>
             </AbsoluteLayout>
         </ScrollView>

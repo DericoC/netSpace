@@ -17,7 +17,6 @@ namespace NetSpace.ViewModel
         private UserService userService = new UserService();
         private readonly SnackBarAlert alert = new SnackBarAlert();
 
-
         public CreateAccountViewModel()
         {
             user = new User();
@@ -36,6 +35,7 @@ namespace NetSpace.ViewModel
                     if (userService.insert(user))
                     {
                         await Application.Current.MainPage.Navigation.PushAsync(new LoginView());
+                        await alert.displaySnackBarAlertAsync("Cuenta creada", 5, SnackBarAlert.INFORMATION);
                     } else
                     {
                         await alert.displaySnackBarAlertAsync("Ha ocurrido un error al crear la cuenta", 5, SnackBarAlert.WARNING);

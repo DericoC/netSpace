@@ -20,7 +20,7 @@
                 <Frame CornerRadius="20" BackgroundColor="White" Margin="0,-20,0,0" HasShadow="False" Padding="0,10,0,10">
                     <Label x:Name="lblName" Margin="20, 20, 20, 20" FontSize="24" FontAttributes="Bold" TextColor="black" Text="{Binding reservationDetail.place.place_name}"/>
                 </Frame>
-                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" Color="#1690F4" Margin="20,-20,20,20"/>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" Color="#F9A007" Margin="20,-20,20,20"/>
                 <Label x:Name="lblDescription" Margin="20, 0, 20, 20" FontSize="20" TextColor="black" Text="{Binding reservationDetail.place.description}"/>
 
                 <Label Margin="20, 0, 20, 10" TextColor="black">
