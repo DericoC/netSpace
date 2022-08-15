@@ -47,8 +47,8 @@
                 LeadingViewPosition="Inside">
             <Entry Text="{Binding search}" x:Name="txtSearch" Keyboard="Plain" TextColor="Black" TextChanged="txtSearch_TextChanged"/>
             <inputLayout:SfTextInputLayout.LeadingView>
-                <Label FontFamily="FASolid"
-                    Text="&#xf002;" Margin="0,14,0,0"/>
+                <Label FontFamily="FASolid" x:Name="searchIcon"
+                    Text="&#xf002;"/>
             </inputLayout:SfTextInputLayout.LeadingView>
         </inputLayout:SfTextInputLayout>
         <syncfusion:SfListView x:Name="placeList" SelectionMode="Single"
@@ -107,7 +107,7 @@
                 <sfPopup:PopupView ShowFooter="False" ShowHeader="False" AnimationMode="Fade">
                     <sfPopup:PopupView.ContentTemplate>
                         <DataTemplate>
-                            <StackLayout Padding="10, 10, 0, 0" x:DataType="model:PopUpMenuItem" HeightRequest="165" WidthRequest="200">
+                            <StackLayout Padding="10, 10, 0, 0" x:DataType="model:PopUpMenuItem" HeightRequest="152" WidthRequest="200">
                                 <buttons:SfButton Text="Cuenta"
                                                              BorderWidth="0"
                                                              TextColor="Black"

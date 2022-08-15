@@ -15,7 +15,7 @@ namespace NetSpace.ViewModel
 		public Command searchCommand;
 		public Command menuCommand;
 		public Command menuOptionCommand;
-		public bool searchBarVisibility { get; set; }
+        public bool searchBarVisibility { get; set; }
 		public string search { get; set; }
 		private Command placeDetailCommand;
 		public ObservableCollection<Place> places { get; set; }
@@ -32,7 +32,7 @@ namespace NetSpace.ViewModel
 			menuCommand = new Command(showPopup);
             menuOptionCommand = new Command<string>(async (x) => await navigateMenuAsync(x));
 			placeDetailCommand = new Command(async (p) => await loadSelectedPlaceAsync(p));
-			searchCommand = new Command(searchShow);
+            searchCommand = new Command(searchShow);
 			foreach (var item in placeService.read())
 			{
 				places.Add(item);
@@ -82,15 +82,28 @@ namespace NetSpace.ViewModel
 					await Application.Current.MainPage.Navigation.PushAsync(new ReservationView());
 					break;
 				case "Salir":
-					UserSession ses = UserSession.getSession();
-					ses.reset();
-					displayPopup = false;
-					Application.Current.MainPage = new NavigationPage(new LoginView());
-					break;
-			}
+					if (Device.RuntimePlatform == Device.iOS)
+                    {
+						displayPopup = false;
+                        UserSession ses = UserSession.getSession();
+                        ses.reset();
+                        Application.Current.MainPage = new LoginView();
+                    } else
+                    {
+                        await this.logoutAsync();
+                    }
+                    break;
+            }
 		}
 
-		async Task loadSelectedPlaceAsync(Object p)
+        private async Task logoutAsync()
+        {
+            UserSession ses = UserSession.getSession();
+            ses.reset();
+            await Application.Current.MainPage.Navigation.PushAsync(new LoginView());
+        }
+
+        async Task loadSelectedPlaceAsync(Object p)
 		{
 			await Application.Current.MainPage.Navigation.PushAsync(new PlaceView(p as Place, false));
 		}
@@ -101,7 +114,7 @@ namespace NetSpace.ViewModel
 			protected set { placeDetailCommand = value; }
 		}
 
-		public Command SearchCommand
+        public Command SearchCommand
 		{
 			get => searchCommand;
 		}
