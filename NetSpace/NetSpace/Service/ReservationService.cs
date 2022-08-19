@@ -11,7 +11,7 @@ namespace NetSpace.Service
         private readonly string INSERT = "INSERT INTO reservations(user_id, place_id, business_id, qr, date_slot, time_start, time_end) VALUES(@user_id, @place_id, @business_id, @qr, @date_slot, @time_start, @time_end);";
         private readonly string UPDATE = "UPDATE reservations SET user_id = @user_id, place_id = @place_id, business_id = @business_id, qr = @qr, date_slot = @date_slot, time_start = @time_start, time_end = @time_end WHERE(reservation_id = @id);";
         private readonly string DELETE = "DELETE FROM reservations WHERE(reservation_id = @id);";
-        private readonly string READ = "SELECT * FROM reservations;";
+        private readonly string READ = "SELECT * FROM reservations r, places p, business b, users u WHERE r.place_id = p.place_id AND r.business_id = b.business_id AND r.user_id = u.user_id;";
         private readonly string READSPECIFIC = "SELECT * FROM reservations WHERE business_id = @business_id;";
         private readonly string READCLIENTSPECIFIC = "SELECT * FROM reservations WHERE user_id = @client_id;";
         private readonly string FINDBYID = "SELECT * FROM reservations WHERE reservation_id = @id;";
@@ -117,17 +117,41 @@ namespace NetSpace.Service
                 {
                     if (rdr.HasRows)
                     {
-                        Reservation r = new Reservation();
-                        r.reservation_id = rdr.GetInt32("reservation_id");
-                        r.user = userService.findById(rdr.GetInt32("user_id"));
-                        r.place = placeService.findById(rdr.GetInt32("place_id"));
-                        r.business = businessService.findById(rdr.GetInt32("business_id"));
-                        r.qr = rdr.GetString("qr");
-                        r.date_slot = rdr.GetDateTime("date_slot");
-                        r.time_start = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_start"));
-                        r.time_end = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_end"));
+                        Reservation reservation = new Reservation();
+                        reservation.business = new Business();
+                        reservation.business = new Business();
+                        reservation.business.business_id = rdr.GetInt32("business_id");
+                        reservation.business.business_name = rdr.GetString("business_name");
+                        reservation.business.type = rdr.GetInt32("type");
+                        reservation.place = new Place();
+                        reservation.place.place_id = rdr.GetInt32("place_id");
+                        reservation.place.place_name = rdr.GetString("place_name");
+                        reservation.place.description = rdr.GetString("description");
+                        reservation.place.dimensions = rdr.GetString("dimensions");
+                        reservation.place.capacity = rdr.GetInt32("capacity");
+                        reservation.place.amenities = rdr.GetString("amenities");
+                        reservation.place.image = rdr.GetString("image");
+                        reservation.place.restrooms = rdr.GetBoolean("restrooms");
+                        reservation.place.rating = rdr.GetInt32("rating");
+                        reservation.reservation_id = rdr.GetInt32("reservation_id");
+                        reservation.user = new User();
+                        reservation.user.user_id = rdr.GetInt32("user_id");
+                        reservation.user.first_name = rdr.GetString("first_name");
+                        reservation.user.last_name = rdr.GetString("last_name");
+                        reservation.user.gender = rdr.GetString("gender");
+                        reservation.user.mail = rdr.GetString("mail");
+                        reservation.user.image = rdr.GetString("image");
+                        reservation.user.phone = rdr.GetString("phone");
+                        reservation.user.address = rdr.GetString("address");
+                        reservation.user.password = rdr.GetString("password");
+                        reservation.user.role = rdr.GetString("role");
+                        reservation.user.provider = rdr.GetInt32("provider");
+                        reservation.qr = rdr.GetString("qr");
+                        reservation.date_slot = rdr.GetDateTime("date_slot");
+                        reservation.time_start = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_start"));
+                        reservation.time_end = timeConverter.getTimeFromMinutes(rdr.GetInt32("time_end"));
 
-                        reservations.Add(r);
+                        reservations.Add(reservation);
                     }
                 }
             }
