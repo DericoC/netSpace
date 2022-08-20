@@ -55,7 +55,7 @@
                         <RowDefinition Height="0.2*"/>
                     </Grid.RowDefinitions>
                     <inputLayout:SfTextInputLayout Grid.Row="0"
-                Hint="Nombre"
+                Hint="Nombre" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <inputLayout:SfTextInputLayout.Triggers>
@@ -73,7 +73,7 @@
                         <Entry Text="{Binding place.place_name}" x:Name="txtNombre" />
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="1"
-                Hint="Descripción"
+                Hint="Descripción" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <inputLayout:SfTextInputLayout.Triggers>
@@ -91,7 +91,7 @@
                         <Entry Text="{Binding place.description}" x:Name="txtApellido"/>
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="2"
-                Hint="Dimensiones"
+                Hint="Dimensiones" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <inputLayout:SfTextInputLayout.Triggers>
@@ -109,7 +109,7 @@
                         <Entry Text="{Binding place.dimensions}" x:Name="txtApellido2"/>
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="3"
-                Hint="Capacidad"
+                Hint="Capacidad" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <inputLayout:SfTextInputLayout.Triggers>
@@ -127,7 +127,7 @@
                         <Entry Text="{Binding place.capacity}" x:Name="txtCorreo" Keyboard="Email"/>
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="4"
-                Hint="Amenidades"
+                Hint="Amenidades" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <inputLayout:SfTextInputLayout.Triggers>
@@ -146,7 +146,7 @@
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="5"
                 TrailingViewPosition="Inside"
-                Hint="Encargado"
+                Hint="Encargado" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <Picker SelectedItem="{Binding place.manager, Mode=TwoWay}"
@@ -157,7 +157,7 @@
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Grid.Row="6"
                 TrailingViewPosition="Inside"
-                Hint="Politica"
+                Hint="Politica" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                         <Picker SelectedItem="{Binding place.policy, Mode=TwoWay}"
@@ -184,7 +184,7 @@
                     </inputLayout:SfTextInputLayout>
 
                     <inputLayout:SfTextInputLayout Grid.Row="8"
-                            TrailingViewPosition="Inside"
+                            TrailingViewPosition="Inside" FocusedColor="#333333"
                             Hint="Hora Inicio"
                             ContainerType="Outlined"
                             OutlineCornerRadius="8">
@@ -192,7 +192,7 @@
                     </inputLayout:SfTextInputLayout>
 
                     <inputLayout:SfTextInputLayout Grid.Row="9"
-                            TrailingViewPosition="Inside"
+                            TrailingViewPosition="Inside" FocusedColor="#333333"
                             Hint="Hora Final"
                             ContainerType="Outlined"
                             OutlineCornerRadius="8">
@@ -200,12 +200,12 @@
                     </inputLayout:SfTextInputLayout>
 
                     <inputLayout:SfTextInputLayout Grid.Row="10"
-                                TrailingViewPosition="Inside"
+                                TrailingViewPosition="Inside" FocusedColor="#333333"
                                 Hint="Frecuencia"
                                 ContainerType="Outlined"
                                 OutlineCornerRadius="8">
                         <Picker SelectedItem="{Binding config.frequency, Mode=TwoWay}"
-                            ItemsSource="{Binding frequency}" ItemDisplayBinding="{Binding value}"/>
+                            ItemsSource="{Binding frequency}" ItemDisplayBinding="{Binding hour_value}"/>
                         <inputLayout:SfTextInputLayout.TrailingView>
                             <Label Text="&#xf0d7;" FontFamily="FASolid" Margin="0,12,0,0"></Label>
                         </inputLayout:SfTextInputLayout.TrailingView>

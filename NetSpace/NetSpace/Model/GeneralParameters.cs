@@ -9,6 +9,7 @@ namespace NetSpace.Model
 		public string general_param_name { get; set; }
 		public string description { get; set; }
 		public string value { get; set; }
+		public string hour_value { get; set; }
 
 		public GeneralParameters()
 		{

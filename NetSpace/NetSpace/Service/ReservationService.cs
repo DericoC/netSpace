@@ -311,7 +311,7 @@ namespace NetSpace.Service
             try
             {
                 cmd = new MySqlCommand(NEARESTRESERVATIONS, this.getConnection());
-                cmd.Parameters.AddWithValue("@bussiness_id", business_id);
+                cmd.Parameters.AddWithValue("@business_id", business_id);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())

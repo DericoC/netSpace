@@ -11,7 +11,7 @@ namespace NetSpace.Service
 {
 	public class PolicyService : Connection, ICRUD<Policy>
 	{
-        private readonly string INSERT = "INSERT INTO policies (policy_name, business_id, age_restriction, deposit, price) VALUES (@policy_name, @business_id, @age_restriction, @deposit, @price);";
+        private readonly string INSERT = "INSERT INTO policies (policy_name, policy_business_id, age_restriction, deposit, price) VALUES (@policy_name, @policy_business_id, @age_restriction, @deposit, @price);";
         private readonly string UPDATE = "UPDATE policies SET policy_name = @policy_name, business_id = @business_id, age_restriction = @age_restriction, deposit = @deposit, price = @price WHERE (policy_id = @id);";
         private readonly string DELETE = "DELETE FROM policies WHERE (policy_id = @id);";
         private readonly string READ = "SELECT * FROM policies;";
@@ -27,7 +27,7 @@ namespace NetSpace.Service
             {
                 cmd = new MySqlCommand(INSERT, this.getConnection());
                 cmd.Parameters.AddWithValue("@policy_name", item.policy_name);
-                cmd.Parameters.AddWithValue("@business_id", item.policy_business_id);
+                cmd.Parameters.AddWithValue("@policy_business_id", item.policy_business_id);
                 cmd.Parameters.AddWithValue("@age_restriction", item.age_restriction);
                 cmd.Parameters.AddWithValue("@deposit", item.deposit);
                 cmd.Parameters.AddWithValue("@price", item.price);

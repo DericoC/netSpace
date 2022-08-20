@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using NetSpace.Model;
 using NetSpace.Service;
+using NetSpace.Util;
 using NetSpace.ViewModel;
 using Syncfusion.XForms.Buttons;
 using Xamarin.Forms;
@@ -34,16 +36,31 @@ namespace NetSpace.View
 
         async void OnPickPhotoButtonClicked(object sender, EventArgs e)
         {
+            string[] response = new string[2];
             (sender as SfButton).IsEnabled = false;
             Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
             if (stream != null)
             {
-                image.Source = ImageSource.FromStream(() => stream);
-                imageLoaded = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    box.IsVisible = true;
+                    busyindicator.IsBusy = true;
+                });
+
                 byte[] imageToBytes = GetImageStreamAsBytes(stream);
-                await placeService.upload(imageToBytes, place.place_id, place.place_name);
+                response = await placeService.upload(imageToBytes, place.place_id, place.place_name);
+                await Task.Delay(100);
+
+                image.Source = Constants.PLACES_PICS + "/" + place.place_id + "/" + response[1];
+                place.image = Constants.PLACES_PICS + "/" + place.place_id + "/" + response[1];
+                imageLoaded = true;
             }
             (sender as SfButton).IsEnabled = true;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                box.IsVisible = false;
+                busyindicator.IsBusy = false;
+            });
         }
 
         private byte[] GetImageStreamAsBytes(Stream input)

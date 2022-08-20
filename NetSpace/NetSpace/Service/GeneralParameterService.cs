@@ -146,6 +146,26 @@ namespace NetSpace.Service
                         gp.general_param_name = rdr.GetString("general_param_name");
                         gp.description = rdr.GetString("description");
                         gp.value = rdr.GetString("value");
+
+                        if (rdr.GetString("value") == "120")
+                        {
+                            gp.hour_value = (Int32.Parse(rdr.GetString("value")) / 60).ToString() + " hours";
+                        }
+                        else if (rdr.GetString("value") == "240")
+                        {
+                            gp.hour_value = (Int32.Parse(rdr.GetString("value")) / 60).ToString() + " hours";
+                        }
+                        else if (rdr.GetString("value") == "360")
+                        {
+                            gp.hour_value = (Int32.Parse(rdr.GetString("value")) / 60).ToString() + " hours";
+                        }
+                        else if (rdr.GetString("value") == "480")
+                        {
+                            gp.hour_value = (Int32.Parse(rdr.GetString("value")) / 60).ToString() + " hours";
+                        } else
+                        {
+                            gp.hour_value = rdr.GetString("value") + " min";
+                        }
                         parameters.Add(gp);
                     }
                 }

@@ -29,7 +29,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <inputLayout:SfTextInputLayout Grid.Row="0"
-                Hint="Nombre"
+                Hint="Nombre" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                 <inputLayout:SfTextInputLayout.Triggers>
@@ -54,7 +54,7 @@
             </StackLayout>
 
             <inputLayout:SfTextInputLayout Grid.Row="2" x:Name="combo" IsVisible="False"
-                TrailingViewPosition="Inside"
+                TrailingViewPosition="Inside" FocusedColor="#333333"
                 Hint="Restricción de Edad"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
@@ -70,7 +70,7 @@
             </inputLayout:SfTextInputLayout>
 
             <inputLayout:SfTextInputLayout Grid.Row="3"
-                Hint="Deposito"
+                Hint="Deposito" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                 <inputLayout:SfTextInputLayout.Triggers>
@@ -89,7 +89,7 @@
             </inputLayout:SfTextInputLayout>
 
             <inputLayout:SfTextInputLayout Grid.Row="4"
-                Hint="Precio"
+                Hint="Precio" FocusedColor="#333333"
                 ContainerType="Outlined"
                 OutlineCornerRadius="8">
                 <inputLayout:SfTextInputLayout.Triggers>

@@ -26,10 +26,9 @@ namespace NetSpace.ViewModel
 		public HomeViewModel()
 		{
 			searchBarVisibility = false;
-			placesOriginal = places;
 			displayPopup = false;
 			places = new ObservableCollection<Place>();
-			menuCommand = new Command(showPopup);
+            menuCommand = new Command(showPopup);
             menuOptionCommand = new Command<string>(async (x) => await navigateMenuAsync(x));
 			placeDetailCommand = new Command(async (p) => await loadSelectedPlaceAsync(p));
             searchCommand = new Command(searchShow);
@@ -37,7 +36,8 @@ namespace NetSpace.ViewModel
 			{
 				places.Add(item);
 			}
-		}
+            placesOriginal = places;
+        }
 
 		public void isSearching(String search)
         {
