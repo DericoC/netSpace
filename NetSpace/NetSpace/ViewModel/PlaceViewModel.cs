@@ -50,7 +50,7 @@ namespace NetSpace.ViewModel
             await Task.Delay(100);
 
             BusinessService businessService = new BusinessService();
-            await Application.Current.MainPage.Navigation.PushAsync(new CalendarView(placeDetail.place_id, placeDetail.business.business_id));
+            await Application.Current.MainPage.Navigation.PushAsync(new CalendarView(placeDetail.place_id, placeDetail.business.business_id, placeDetail.place_name));
             Device.BeginInvokeOnMainThread(() =>
             {
                 isBusy = false;

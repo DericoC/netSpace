@@ -16,10 +16,11 @@ namespace NetSpace.View
         private readonly SnackBarAlert alert = new SnackBarAlert();
         int PlaceID = 0;
         int BusinessID = 0;
+        string BusinessName = "";
         UserSession ses = UserSession.getSession();
         ReservationService reservationService = new ReservationService();
 
-        public CalendarView(int placeId, int business_id)
+        public CalendarView(int placeId, int business_id, string business_name)
         {
             InitializeComponent();
             calendar.Locale = new System.Globalization.CultureInfo("ES");
@@ -28,6 +29,7 @@ namespace NetSpace.View
             busyindicator.IsBusy = false;
             PlaceID = placeId;
             BusinessID = business_id;
+            BusinessName = business_name;
         }
 
         private async void Calendar_InlineItemTapped(object sender, InlineItemTappedEventArgs e)
@@ -60,6 +62,13 @@ namespace NetSpace.View
 
                     if (reservationService.insert(reservation))
                     {
+                        PlaceService s = new PlaceService();
+                        String day = reservation.date_slot.ToString("dd/MM/yyyy");
+                        DateTime timeStart = DateTime.Today.Add(reservation.time_start);
+                        DateTime timeEnd = DateTime.Today.Add(reservation.time_end);
+                        String start = timeStart.ToString("hh:mm tt");
+                        String end = timeEnd.ToString("hh:mm tt");
+                        s.sendConfirmationMail(UserSession.getSession().getUser().mail, reservation.qr, UserSession.getSession().getUser().first_name, BusinessName, day, start, end);
                         Navigation.PushAsync(new HomeView());
                         alert.displaySnackBarAlertAsync("Se ha realizado la reserva.", 5, SnackBarAlert.INFORMATION);
                     }
